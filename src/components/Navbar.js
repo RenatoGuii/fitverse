@@ -1,52 +1,39 @@
-import { GiHamburgerMenu } from "react-icons/gi";
+import React, { useEffect } from "react";
 
 const Navbar = () => {
-  // Menu Mobile
-  class MobileNavbar {
-    constructor(mobileMenu, navList, navLinks) {
-      this.mobileMenu = document.querySelector(mobileMenu);
-      this.navList = document.querySelector(navList);
-      this.navLinks = document.querySelectorAll(navLinks);
-      this.activeClass = "active";
-    }
+  useEffect(() => {
+    const mobileMenu = document.querySelector(".button-menu");
+    const navList = document.querySelector(".nav-list");
+    const navLinks = document.querySelectorAll(".nav-item");
 
-    animateLinks() {
-      this.navLinks.forEach((link, index) => {
+    const animateLinks = () => {
+      navLinks.forEach((link, index) => {
         link.style.animation
           ? (link.style.animation = "")
-          : (link.style.animation = `navLinkFade 0.5s ease forwards ${
-              index / 7 + 0.3
-            }s`);
+          : (link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`);
       });
-    }
+    };
 
-    handleClick() {
-      this.navList.classList.toggle(this.activeClass);
-      this.mobileMenu.classList.toggle(this.activeClass);
-      this.animateLinks();
-    }
+    const handleClick = () => {
+      navList.classList.toggle("active");
+      mobileMenu.classList.toggle("active");
+      animateLinks();
+    };
 
-    addClickEvent() {
-      this.handleClick();
-    }
-
-    init() {
-      if (this.mobileMenu) {
-        this.addClickEvent();
+    const initNavbar = () => {
+      if (mobileMenu) {
+        mobileMenu.addEventListener("click", handleClick);
       }
-      return this;
-    }
-  }
+    };
 
-  const mobileNavbar = new MobileNavbar(
-    ".button-menu",
-    ".nav-list",
-    ".nav-item"
-  );
+    initNavbar();
 
-  const initNavbar = () => {
-    mobileNavbar.init();
-  };
+    return () => {
+      if (mobileMenu) {
+        mobileMenu.removeEventListener("click", handleClick);
+      }
+    };
+  }, []);
 
   return (
     <div>
@@ -55,7 +42,7 @@ const Navbar = () => {
           <a href="/" className="navbar-logo">
             FitVerse
           </a>
-          <div className="button-menu" onClick={initNavbar}>
+          <div className="button-menu">
             <div className="line1"></div>
             <div className="line2"></div>
             <div className="line3"></div>
