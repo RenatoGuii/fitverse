@@ -1,0 +1,21 @@
+// Abstracts
+@import "../sass/abstracts/variables.scss";
+@import "../sass/abstracts/breakpoints.scss";
+@import "../sass/abstracts/keyframes.scss";
+
+// Components
+@import "../sass/components/Navbar.scss";
+
+// Pages
+@import "../sass/pages/Home.scss";
+
+
+
+// General Styles
+* {
+    font-family: $FontMain;
+}
+
+body {
+    overflow-x: hidden;
+}

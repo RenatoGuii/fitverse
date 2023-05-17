@@ -1,8 +1,13 @@
+// CSS
+import "./styles/sass/Main.css"
+
+//Pages
+import Home from "./pages/Home";
 
 function App() {
   return (
     <div>
-      teste
+      <Home />
     </div>
   );
 }
