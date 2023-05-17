@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   useEffect(() => {
@@ -10,7 +11,9 @@ const Navbar = () => {
       navLinks.forEach((link, index) => {
         link.style.animation
           ? (link.style.animation = "")
-          : (link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`);
+          : (link.style.animation = `navLinkFade 0.5s ease forwards ${
+              index / 7 + 0.3
+            }s`);
       });
     };
 
@@ -39,9 +42,9 @@ const Navbar = () => {
     <div>
       <header className="container-navbar">
         <nav>
-          <a href="/" className="navbar-logo">
+          <Link to={"/"} className="navbar-logo">
             FitVerse
-          </a>
+          </Link>
           <div className="button-menu">
             <div className="line1"></div>
             <div className="line2"></div>
@@ -49,24 +52,24 @@ const Navbar = () => {
           </div>
           <ul className="nav-list">
             <li className="nav-item">
-              <a href="#about" className="nav-link active">
+              <Link to={"/"} className="nav-link active">
                 Sobre
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="#plan-training" className="nav-link active">
+              <Link to={"/trainingPlan"} className="nav-link active">
                 Plano de Treinos
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="#imc" className="nav-link active">
+              <Link to={"imc"} className="nav-link active">
                 IMC
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="*" className="nav-link active">
+              <Link to={"/perfil"} className="nav-link active">
                 Perfil
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

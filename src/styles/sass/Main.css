@@ -8,12 +8,12 @@
     background-color: #0D0D0D;
     border-left: 3px solid #FFB627;
     flex-direction: column;
-    height: calc(100vh - 72.9px);
+    height: calc(100vh - 68.9px);
     justify-content: space-around;
     padding: 0;
     position: absolute;
     right: 0;
-    top: 72.9px;
+    top: 68.9px;
     transform: translateX(100%);
     transition: transform 0.5s ease-in-out;
     width: 50vw;
@@ -75,7 +75,7 @@
   font-size: 27px;
   font-weight: 700;
   letter-spacing: 1px;
-  padding-bottom: 10px;
+  padding-bottom: 6px;
   text-decoration: none;
 }
 .container-navbar nav .nav-list {
