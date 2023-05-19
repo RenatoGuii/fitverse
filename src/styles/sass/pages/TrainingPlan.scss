@@ -1,0 +1,35 @@
+.container.trainingPlan {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 10%;
+    
+    .text-tp {
+        width: 50%;
+
+        h2 {
+            font-weight: 800;
+        }
+        p {
+            font-weight: 400;
+            margin: 0 auto 15px auto
+        }
+        input {
+            @include primaryButton;
+        }
+    }
+
+    .images-desktop {
+        width: 50%;
+
+        .images-tp-desktop {
+            border-radius: 12px;
+        }
+    }
+
+    .images-mobile {
+        display: none;
+    }
+
+}

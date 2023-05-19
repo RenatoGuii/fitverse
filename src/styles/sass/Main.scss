@@ -1,12 +1,18 @@
 // Abstracts
+@import "../sass/abstracts/mixins.scss";
 @import "../sass/abstracts/variables.scss";
-@import "../sass/abstracts/breakpoints.scss";
 @import "../sass/abstracts/keyframes.scss";
+
+// Pages
+@import "../sass/pages/TrainingPlan.scss";
 
 // Components
 @import "../sass/components/Navbar.scss";
 
-// Pages
+// Breakpoints
+@import "../sass/abstracts/breakpoints.scss";
+
+
 
 
 
@@ -16,5 +22,6 @@
 }
 
 body {
+    background-color: $White;
     overflow-x: hidden;
 }
