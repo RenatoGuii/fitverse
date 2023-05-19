@@ -14,9 +14,10 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-top: 10%;
+  padding-top: 68.9px;
 }
 .container.trainingPlan .text-tp {
+  padding-top: 15%;
   width: 50%;
 }
 .container.trainingPlan .text-tp h2 {
@@ -42,10 +43,27 @@
   transition: 0.5s;
 }
 .container.trainingPlan .images-desktop {
+  position: relative;
   width: 50%;
 }
 .container.trainingPlan .images-desktop .images-tp-desktop {
   border-radius: 12px;
+  height: 220px;
+}
+.container.trainingPlan .images-desktop #tp1 {
+  position: absolute;
+  right: 59%;
+  top: 10px;
+}
+.container.trainingPlan .images-desktop #tp2 {
+  position: absolute;
+  right: 25%;
+  top: 160px;
+}
+.container.trainingPlan .images-desktop #tp3 {
+  position: absolute;
+  right: 25%;
+  top: -120px;
 }
 .container.trainingPlan .images-mobile {
   display: none;
@@ -54,6 +72,9 @@
 .container-navbar {
   background-color: #0D0D0D;
   border-bottom: 3px solid #FFB627;
+  position: fixed;
+  width: 100%;
+  height: 68.9px;
 }
 .container-navbar nav {
   align-items: center;
@@ -117,6 +138,12 @@
 }
 
 @media (max-width: 576px) {
+  nav {
+    background-color: #0D0D0D;
+    border-bottom: 3px solid #FFB627;
+    position: fixed;
+    width: 100%;
+  }
   nav .button-menu {
     display: block !important;
   }
@@ -125,7 +152,7 @@
     background-color: #0D0D0D;
     border-left: 3px solid #FFB627;
     flex-direction: column;
-    height: calc(100% - 68.9px);
+    height: calc(100vh - 68.9px);
     justify-content: space-around;
     padding: 0;
     position: absolute;
@@ -142,30 +169,29 @@
   nav .nav-list.active {
     transform: translateX(0);
   }
-  .images-desktop {
+  .container.trainingPlan .images-desktop {
     display: none !important;
   }
-  .images-mobile {
+  .container.trainingPlan .images-mobile {
     display: block !important;
     margin-top: 20px;
   }
-  .images-mobile .images-tp-mobile {
+  .container.trainingPlan .images-mobile .images-tp-mobile {
     border-radius: 1px;
     height: 40vw;
     margin: auto;
     width: 70vw;
   }
-  .text-tp p {
-    margin: auto;
+  .container.trainingPlan .text-tp p {
     width: 70%;
   }
 }
 @media (max-width: 768px) {
   .container.trainingPlan {
     flex-direction: column !important;
-    padding: 0 !important;
   }
   .container.trainingPlan .text-tp {
+    padding-top: 0;
     width: 100% !important;
   }
   .container.trainingPlan .text-tp h2, .container.trainingPlan .text-tp p {
@@ -188,7 +214,7 @@
     width: 100% !important;
   }
   .container.trainingPlan .images-desktop .images-tp-desktop {
-    height: 260px !important;
+    height: 245px !important;
   }
   .container.trainingPlan .images-desktop #tp1 {
     position: relative !important;
@@ -202,31 +228,57 @@
   }
   .container.trainingPlan .images-desktop #tp3 {
     display: block !important;
+    position: relative !important;
+    right: 0 !important;
+    top: 0 !important;
   }
 }
 @media (max-width: 993px) {
-  .container.trainingPlan {
-    padding-top: 5% !important;
-  }
   .container.trainingPlan .images-desktop {
     position: relative;
     height: 300px;
   }
   .container.trainingPlan .images-desktop .images-tp-desktop {
-    height: 215px;
+    height: 225px;
   }
   .container.trainingPlan .images-desktop #tp1 {
     position: absolute;
     right: 45%;
-    top: 5%;
+    top: 0%;
   }
   .container.trainingPlan .images-desktop #tp2 {
     position: absolute;
     right: 0;
-    top: 28%;
+    top: 10%;
   }
   .container.trainingPlan .images-desktop #tp3 {
     display: none;
+  }
+}
+@media (min-width: 993px) {
+  .images-desktop {
+    width: 468px !important;
+  }
+  .images-desktop #tp1 {
+    position: absolute;
+    right: 53% !important;
+    top: -80px !important;
+  }
+  .images-desktop #tp2 {
+    position: absolute;
+    right: 17% !important;
+    top: 80px !important;
+  }
+  .images-desktop #tp3 {
+    position: absolute;
+    right: 17% !important;
+    top: -160px !important;
+  }
+}
+@media (max-width: 1200px) {
+  .container.trainingPlan .images-desktop {
+    margin-top: 50px;
+    position: relative;
   }
 }
 * {

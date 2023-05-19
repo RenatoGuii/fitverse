@@ -1,13 +1,17 @@
 .container-navbar {
     background-color: $Black;
     border-bottom: 3px solid $Orange;
-
+    position: fixed;
+    width: 100%;
+    
+    height: 68.9px;
+    
     nav {
         align-items: center;
         display: flex;
         justify-content: space-around;
         padding: 10px;
-
+        
         .button-menu {
             cursor: pointer;
             display: none;
@@ -63,6 +67,8 @@
                     font-weight: 300;
                     padding: 5px 10px;
                     transition: 0.5s;
+
+                    
                                 
                     &:hover {
                         background-color: $Orange;

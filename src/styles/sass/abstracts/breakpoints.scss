@@ -6,6 +6,10 @@
     // Navbar
 
     nav {
+        background-color: $Black;
+        border-bottom: 3px solid $Orange;
+        position: fixed;
+        width: 100%;
 
         .button-menu {
             display: block !important; 
@@ -16,7 +20,7 @@
             background-color: $Black;
             border-left: 3px solid $Orange;
             flex-direction: column;
-            height: calc(100% - 68.9px);
+            height: calc(100vh - 68.9px);
             justify-content: space-around;
             padding: 0;
             position: absolute;
@@ -39,30 +43,32 @@
 
     // Training Plan
 
-    .images-desktop {
-        display: none !important;
-    }
+    .container.trainingPlan {
 
-    .images-mobile {
-        display: block !important;
-        margin-top: 20px;
-
-        .images-tp-mobile {
-            border-radius: 1px;
-            height: 40vw;
-            margin: auto;
-            width: 70vw;
+        .images-desktop {
+            display: none !important;
         }
+    
+        .images-mobile {
+            display: block !important;
+            margin-top: 20px;
+    
+            .images-tp-mobile {
+                border-radius: 1px;
+                height: 40vw;
+                margin: auto;
+                width: 70vw;
+            }
+        }
+    
+        .text-tp {
+            p {
+                width: 70%;
+            }    
+    
+        }
+
     }
-
-    .text-tp {
-        p {
-            margin: auto;
-            width: 70%;
-        }    
-
-    }
-
 }
 
 // MD
@@ -71,9 +77,9 @@
     // Training Plan
     .container.trainingPlan {
         flex-direction: column !important;
-        padding: 0 !important;
 
         .text-tp {
+            padding-top: 0;
             width: 100% !important;
 
             h2, p {
@@ -100,8 +106,7 @@
             width: 100% !important;
 
             .images-tp-desktop {
-                height: 260px !important;
-
+                height: 245px !important;
             }
             
             #tp1 {
@@ -118,14 +123,13 @@
 
             #tp3 {
                 display: block !important;
+                position: relative !important;
+                right: 0 !important;
+                top: 0 !important;
             }
 
-        }
-    
-        
+        }  
     }
-
-
 }
 
 // LG
@@ -134,27 +138,25 @@
     // Training Plan
 
     .container.trainingPlan {
-        padding-top: 5% !important;
 
         .images-desktop {
             position: relative;
             height: 300px;
-            
-            .images-tp-desktop {
-                height: 215px;
-            }
 
+            .images-tp-desktop {
+                height: 225px;
+            }
+            
             #tp1 {
                 position: absolute;
                 right: 45%;
-                top: 5%;
+                top: 0%;
             }
 
             #tp2 {
                 position: absolute;
                 right: 0;
-                top: 28%;
-                
+                top: 10%;
             }
 
             #tp3 {
@@ -162,13 +164,47 @@
             }
         }
     }
+}
 
+@media (min-width: 993px) {
+    .images-desktop {
+        width: 468px !important;
+
+        #tp1 {
+            position: absolute;
+            right: 53% !important;
+            top: -80px !important;
+        }
+
+        #tp2 {
+            position: absolute;
+            right: 17% !important;
+            top: 80px !important;
+            
+        }
+
+        #tp3 {
+            position: absolute;
+            right: 17% !important;
+            top: -160px !important;
+        }
+        
+    }
 }
 
 // XL
 
 @media (max-width: 1200px) {
 
+    // Training Plan
+
+    .container.trainingPlan {
+    
+        .images-desktop {
+            margin-top: 50px;
+            position: relative;
+        }  
+    }
 }
 
 // XXL

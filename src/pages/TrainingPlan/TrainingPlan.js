@@ -6,7 +6,6 @@ import tp4 from "../../assets/images/tp4.jpg";
 
 const TrainingPlan = () => {
   return (
-    <div>
       <div className="container trainingPlan">
         <div className="text-tp">
           <h2>
@@ -26,8 +25,8 @@ const TrainingPlan = () => {
         <div className="images-mobile">
           <img className="images-tp-mobile" src={tp4} alt="imagens de academia 4"  />
         </div>
+
       </div>
-    </div>
   );
 };
 

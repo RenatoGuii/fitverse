@@ -3,9 +3,10 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-top: 10%;
+    padding-top: 68.9px;
     
     .text-tp {
+        padding-top: 15%;
         width: 50%;
 
         h2 {
@@ -13,7 +14,7 @@
         }
         p {
             font-weight: 400;
-            margin: 0 auto 15px auto
+            margin: 0 auto 15px auto;
         }
         input {
             @include primaryButton;
@@ -21,10 +22,30 @@
     }
 
     .images-desktop {
+        position: relative;
         width: 50%;
 
         .images-tp-desktop {
             border-radius: 12px;
+            height: 220px;
+        }
+
+        #tp1 {
+            position: absolute;
+            right: 59%;
+            top: 10px;
+        }
+
+        #tp2 {
+            position: absolute;
+            right: 25%;   
+            top: 160px;
+        }
+
+        #tp3 {
+            position: absolute;
+            right: 25%;
+            top: -120px;
         }
     }
 
