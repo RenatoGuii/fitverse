@@ -21,26 +21,13 @@
   width: 50%;
 }
 .container.trainingPlan .text-tp h2 {
+  color: rgb(1, 1, 52);
   font-weight: 800;
 }
 .container.trainingPlan .text-tp p {
+  color: rgb(1, 1, 52);
   font-weight: 400;
   margin: 0 auto 15px auto;
-}
-.container.trainingPlan .text-tp input {
-  background-color: #FFB627;
-  border: none;
-  border-radius: 10px;
-  color: #0D0D0D;
-  font-size: 11.5px;
-  font-weight: 600;
-  padding: 8px 15px;
-  transition: 0.5s;
-}
-.container.trainingPlan .text-tp input:hover {
-  background-color: #0D0D0D;
-  color: #FFB627;
-  transition: 0.5s;
 }
 .container.trainingPlan .images-desktop {
   position: relative;
@@ -69,11 +56,112 @@
   display: none;
 }
 
+.container.form {
+  margin-top: 230px;
+  margin-bottom: 500px;
+}
+.container.form h4 {
+  color: rgb(1, 1, 52);
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+.container.form .form-tp .input-form label {
+  color: rgb(1, 1, 52);
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.container.form .form-tp .input-form select {
+  margin-bottom: 20px;
+  transition: 0.5s;
+}
+.container.form .form-tp .input-form select:hover {
+  cursor: pointer;
+}
+.container.form .form-tp .input-form select:focus {
+  border: 1px solid rgb(1, 1, 52);
+  box-shadow: none;
+  transition: 0.5s;
+}
+.container.form .form-tp .input-form select .selected-op {
+  font-weight: bold;
+}
+.container.form .form-tp .search-button {
+  background-color: #FFB627;
+  border: none;
+  border-radius: 10px;
+  color: #0D0D0D;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 15px;
+  transition: 0.5s;
+}
+.container.form .form-tp .search-button:hover {
+  background-color: #0D0D0D;
+  color: #FFB627;
+  transition: 0.5s;
+}
+.container.form .results-form {
+  margin-top: 40px;
+}
+.container.form .results-form .row > * {
+  padding: 0;
+}
+.container.form .results-form .row {
+  margin: 0;
+}
+.container.form .results-form .row .result-item {
+  border: 2px solid rgb(1, 1, 52);
+  margin-right: 8px;
+  width: 230px;
+}
+.container.form .results-form .row .result-item p {
+  padding: 10px 0;
+  margin: 0;
+}
+.container.form .results-form .row .result-item .name-item {
+  background-color: rgb(1, 1, 52);
+  border-bottom: 2px solid rgb(1, 1, 52);
+  color: #FBFBFD;
+  text-align: center;
+  width: 100%;
+}
+.container.form .results-form .row .result-item .type-item,
+.container.form .results-form .row .result-item .muscle-item,
+.container.form .results-form .row .result-item .level-item {
+  padding-left: 5px;
+  font-weight: 700;
+}
+.container.form .results-form .row .result-item .type-item span,
+.container.form .results-form .row .result-item .muscle-item span,
+.container.form .results-form .row .result-item .level-item span {
+  font-weight: 400;
+}
+.container.form .results-form .row .result-item input {
+  background-color: rgb(1, 1, 52);
+  border: 1px solid transparent;
+  border-radius: 5px;
+  display: block;
+  color: #FBFBFD;
+  font-size: 12px;
+  padding: 8px 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.5s;
+  margin: 10px auto;
+}
+.container.form .results-form .row .result-item input:hover {
+  background-color: #FBFBFD;
+  color: rgb(1, 1, 52);
+  border-color: rgb(1, 1, 52);
+  transition: 0.5s;
+}
+
 .container-navbar {
   background-color: #0D0D0D;
   border-bottom: 3px solid #FFB627;
   position: fixed;
   width: 100%;
+  z-index: 999;
   height: 68.9px;
 }
 .container-navbar nav {
@@ -185,6 +273,16 @@
   .container.trainingPlan .text-tp p {
     width: 70%;
   }
+  .container.form {
+    margin-top: 50px !important;
+  }
+  .container.form h4 {
+    text-align: center;
+  }
+  .container.form .form-tp .search-button {
+    display: block;
+    margin: auto;
+  }
 }
 @media (max-width: 768px) {
   .container.trainingPlan {
@@ -232,6 +330,9 @@
     right: 0 !important;
     top: 0 !important;
   }
+  .container.form .results-form .row .result-item {
+    margin: auto;
+  }
 }
 @media (max-width: 993px) {
   .container.trainingPlan .images-desktop {
@@ -244,15 +345,18 @@
   .container.trainingPlan .images-desktop #tp1 {
     position: absolute;
     right: 45%;
-    top: 0%;
+    top: 10%;
   }
   .container.trainingPlan .images-desktop #tp2 {
     position: absolute;
     right: 0;
-    top: 10%;
+    top: 20%;
   }
   .container.trainingPlan .images-desktop #tp3 {
     display: none;
+  }
+  .container.form {
+    margin-top: 10px;
   }
 }
 @media (min-width: 993px) {
@@ -261,18 +365,21 @@
   }
   .images-desktop #tp1 {
     position: absolute;
-    right: 53% !important;
-    top: -80px !important;
+    right: 60% !important;
+    top: -70px !important;
   }
   .images-desktop #tp2 {
     position: absolute;
-    right: 17% !important;
-    top: 80px !important;
+    right: 25% !important;
+    top: 90px !important;
   }
   .images-desktop #tp3 {
     position: absolute;
-    right: 17% !important;
-    top: -160px !important;
+    right: 25% !important;
+    top: -150px !important;
+  }
+  .text-tp {
+    width: calc(100% - 468px) !important;
   }
 }
 @media (max-width: 1200px) {

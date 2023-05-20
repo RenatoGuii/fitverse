@@ -4,20 +4,19 @@
     flex-direction: row;
     justify-content: center;
     padding-top: 68.9px;
-    
+   
     .text-tp {
         padding-top: 15%;
         width: 50%;
 
         h2 {
+            color: $Blue;
             font-weight: 800;
         }
         p {
+            color: $Blue;
             font-weight: 400;
             margin: 0 auto 15px auto;
-        }
-        input {
-            @include primaryButton;
         }
     }
 
@@ -52,5 +51,100 @@
     .images-mobile {
         display: none;
     }
+}
 
+
+.container.form {
+    margin-top: 230px;
+    margin-bottom: 500px;
+
+    h4 {
+        color: $Blue;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+
+    .form-tp {
+
+        .input-form {
+            label {
+                color: $Blue;
+                font-weight: 500;
+                margin-bottom: 5px;
+            }
+
+            select {
+                margin-bottom: 20px;
+                transition: 0.5s;
+                
+                &:hover {
+                    cursor: pointer;
+                }
+                
+                &:focus {
+                    border: 1px solid $Blue;
+                    box-shadow: none;
+                    transition: 0.5s;
+                }
+
+                .selected-op {
+                    font-weight: bold
+                }
+            }
+
+        }
+
+        .search-button {
+            @include primaryButton(13px);
+        }
+    }
+
+    .results-form {
+        margin-top: 40px;
+        
+        .row>* {
+            padding: 0;
+        }
+
+        .row {
+            margin: 0;
+
+            .result-item {
+                border: 2px solid $Blue;
+                margin-right: 8px;
+                width: 230px;
+    
+                p {
+                    padding: 10px 0;
+                    margin: 0;
+                }
+    
+                .name-item {
+                    background-color: $Blue;
+                    border-bottom: 2px solid $Blue;
+                    color: $White;
+                    text-align: center;
+                    width: 100%;
+                }
+    
+                .type-item,
+                .muscle-item,
+                .level-item {
+                    padding-left: 5px;
+                    font-weight: 700;
+    
+                    span {
+                        font-weight: 400;
+                    }
+                }
+    
+                input {
+                    @include secondaryButton(12px);
+                    margin: 10px auto;
+                }
+            }
+        }
+        
+            
+    }
 }

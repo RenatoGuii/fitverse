@@ -65,9 +65,24 @@
             p {
                 width: 70%;
             }    
-    
+        }
+    }
+
+    .container.form {
+        margin-top: 50px !important;
+
+        h4 {
+            text-align: center;
         }
 
+        .form-tp {
+            .search-button {
+                display: block;
+                margin: auto;
+            }
+        }
+
+        
     }
 }
 
@@ -130,6 +145,16 @@
 
         }  
     }
+
+    .container.form {
+        .results-form {
+            .row {
+                .result-item {
+                    margin: auto;
+                }
+            }
+        }
+    }
 }
 
 // LG
@@ -150,19 +175,23 @@
             #tp1 {
                 position: absolute;
                 right: 45%;
-                top: 0%;
+                top: 10%;
             }
 
             #tp2 {
                 position: absolute;
                 right: 0;
-                top: 10%;
+                top: 20%;
             }
 
             #tp3 {
                 display: none;
             }
         }
+    }
+
+    .container.form {
+        margin-top: 10px;
     }
 }
 
@@ -172,24 +201,29 @@
 
         #tp1 {
             position: absolute;
-            right: 53% !important;
-            top: -80px !important;
+            right: 60% !important;
+            top: -70px !important;
         }
 
         #tp2 {
             position: absolute;
-            right: 17% !important;
-            top: 80px !important;
+            right: 25% !important;
+            top: 90px !important;
             
         }
 
         #tp3 {
             position: absolute;
-            right: 17% !important;
-            top: -160px !important;
+            right: 25% !important;
+            top: -150px !important;
         }
         
     }
+
+    .text-tp {
+        width: calc(100% - 468px) !important;
+    }
+
 }
 
 // XL
