@@ -73,23 +73,25 @@
                 margin-bottom: 5px;
             }
 
-            select {
+            .form-select {
                 margin-bottom: 20px;
-                transition: 0.5s;
                 
                 &:hover {
                     cursor: pointer;
                 }
                 
                 &:focus {
-                    border: 1px solid $Blue;
+                    outline: 1px solid $Blue;
                     box-shadow: none;
-                    transition: 0.5s;
                 }
 
                 .selected-op {
                     font-weight: bold
                 }
+            }
+
+            .form-select.error {
+                outline: 3px solid red
             }
 
         }

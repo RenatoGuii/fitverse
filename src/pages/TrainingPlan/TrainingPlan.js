@@ -14,30 +14,25 @@ const TrainingPlan = () => {
   const [type, setType] = useState("");
   const [level, setLevel] = useState("");
 
+  const [muscleError, setMuscleError] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (muscle !== "" && type !== "" && level !== "") {
+  
+    if (muscle === "") {
+      setMuscleError(true);
+      console.log("Escolha um primeiro");
+    } else {
+      setMuscleError(false);
       console.log(muscle);
       console.log(type);
       console.log(level);
-    } else if (muscle !== "" && type !== "" && level === "") {
-      console.log(muscle);
-      console.log(type);
-    } else if (muscle !== "" && type === "" && level !== "") {
-      console.log(muscle);
-      console.log(level);
-    } else if (muscle !== "" && type === "" && level === "") {
-      console.log(muscle);
-    } else if (muscle === "") {
-      console.log("escolha um primeiro");
+      setMuscle("");
+      setType("");
+      setLevel("");
     }
-
-    // resetar valores
-    setMuscle("");
-    setType("");
-    setLevel("");
   };
+  
 
   const teste = [
     {
@@ -105,7 +100,7 @@ const TrainingPlan = () => {
             <label htmlFor="type">Musculo (Obrigatório)</label>
             <select
               id="tipo"
-              className="form-select"
+              className={muscleError ? "form-select error" : "form-select"}
               onChange={(e) => setMuscle(e.target.value)}
               value={muscle}
             >
@@ -172,6 +167,7 @@ const TrainingPlan = () => {
         </form>
 
         <div className="results-form">
+
           <h4>Resultados:</h4>
 
           <div className="row">

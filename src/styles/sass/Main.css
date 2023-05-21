@@ -21,11 +21,11 @@
   width: 50%;
 }
 .container.trainingPlan .text-tp h2 {
-  color: rgb(1, 1, 52);
+  color: rgb(1, 1, 41);
   font-weight: 800;
 }
 .container.trainingPlan .text-tp p {
-  color: rgb(1, 1, 52);
+  color: rgb(1, 1, 41);
   font-weight: 400;
   margin: 0 auto 15px auto;
 }
@@ -61,29 +61,30 @@
   margin-bottom: 500px;
 }
 .container.form h4 {
-  color: rgb(1, 1, 52);
+  color: rgb(1, 1, 41);
   font-weight: 700;
   margin-bottom: 25px;
 }
 .container.form .form-tp .input-form label {
-  color: rgb(1, 1, 52);
+  color: rgb(1, 1, 41);
   font-weight: 500;
   margin-bottom: 5px;
 }
-.container.form .form-tp .input-form select {
+.container.form .form-tp .input-form .form-select {
   margin-bottom: 20px;
-  transition: 0.5s;
 }
-.container.form .form-tp .input-form select:hover {
+.container.form .form-tp .input-form .form-select:hover {
   cursor: pointer;
 }
-.container.form .form-tp .input-form select:focus {
-  border: 1px solid rgb(1, 1, 52);
+.container.form .form-tp .input-form .form-select:focus {
+  outline: 1px solid rgb(1, 1, 41);
   box-shadow: none;
-  transition: 0.5s;
 }
-.container.form .form-tp .input-form select .selected-op {
+.container.form .form-tp .input-form .form-select .selected-op {
   font-weight: bold;
+}
+.container.form .form-tp .input-form .form-select.error {
+  outline: 3px solid red;
 }
 .container.form .form-tp .search-button {
   background-color: #FFB627;
@@ -110,7 +111,7 @@
   margin: 0;
 }
 .container.form .results-form .row .result-item {
-  border: 2px solid rgb(1, 1, 52);
+  border: 2px solid rgb(1, 1, 41);
   margin-right: 8px;
   width: 230px;
 }
@@ -119,8 +120,8 @@
   margin: 0;
 }
 .container.form .results-form .row .result-item .name-item {
-  background-color: rgb(1, 1, 52);
-  border-bottom: 2px solid rgb(1, 1, 52);
+  background-color: rgb(1, 1, 41);
+  border-bottom: 2px solid rgb(1, 1, 41);
   color: #FBFBFD;
   text-align: center;
   width: 100%;
@@ -137,7 +138,7 @@
   font-weight: 400;
 }
 .container.form .results-form .row .result-item input {
-  background-color: rgb(1, 1, 52);
+  background-color: rgb(1, 1, 41);
   border: 1px solid transparent;
   border-radius: 5px;
   display: block;
@@ -151,12 +152,12 @@
 }
 .container.form .results-form .row .result-item input:hover {
   background-color: #FBFBFD;
-  color: rgb(1, 1, 52);
-  border-color: rgb(1, 1, 52);
+  color: rgb(1, 1, 41);
+  border-color: rgb(1, 1, 41);
   transition: 0.5s;
 }
 .container.form .results-form .row .result-item .modal.fade.show .modal-dialog .modal-content .header-modal {
-  background-color: rgb(1, 1, 52);
+  background-color: rgb(1, 1, 41);
   position: relative;
 }
 .container.form .results-form .row .result-item .modal.fade.show .modal-dialog .modal-content .header-modal .modal-title {
@@ -185,7 +186,7 @@
   word-wrap: break-word;
 }
 .container.form .results-form .row .result-item .modal.fade.show .modal-dialog .modal-content .footer-modal {
-  background-color: rgb(1, 1, 52);
+  background-color: rgb(1, 1, 41);
   display: flex;
   justify-content: end;
   padding: 10px;
@@ -325,7 +326,7 @@
     background-color: #0D0D0D;
     border-left: 3px solid #FFB627;
     flex-direction: column;
-    height: calc(100vh - 100%);
+    height: calc(100vh - 100%) !important;
     justify-content: space-around;
     padding: 0;
     position: absolute;

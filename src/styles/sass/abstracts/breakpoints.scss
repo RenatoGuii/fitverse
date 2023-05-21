@@ -54,7 +54,7 @@
             background-color: $Black;
             border-left: 3px solid $Orange;
             flex-direction: column;
-            height: calc(100vh - 100%);
+            height: calc(100vh - 100%) !important;
             justify-content: space-around;
             padding: 0;
             position: absolute;
