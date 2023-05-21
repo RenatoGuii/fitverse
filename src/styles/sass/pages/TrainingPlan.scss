@@ -142,6 +142,66 @@
                     @include secondaryButton(12px);
                     margin: 10px auto;
                 }
+
+                .modal.fade.show {
+                    .modal-dialog {
+                        .modal-content {
+                            .header-modal {
+                                background-color: $Blue;
+                                position: relative;
+
+                                .modal-title {
+                                    text-align: center;
+                                    padding:10px 0;
+                                    color: $White;
+                                }
+
+                                .close-button {
+                                    color: $White;
+                                    cursor: pointer;
+                                    font-size: 25px;
+                                    position: absolute;
+                                    right: 2%;
+                                    top: 25%;
+                                    transition: 0.3s;
+
+                                    &:hover {
+                                        opacity: 0.5;
+                                        transition: 0.3s;
+                                    }
+                                }
+
+                            }
+
+                            .body-modal {
+                                background-color: $White;
+                                padding: 0 10px;
+
+                                p {
+                                    word-wrap: break-word;
+                                }
+                            }
+
+                            .footer-modal {
+                                background-color: $Blue;
+                                display: flex;
+                                justify-content: end;
+                                padding: 10px;
+
+                                .close-button2 {
+                                    @include modalButton(12px, rgba(255, 0, 0, 0.625));
+                                    margin-right: 15px;
+                                }
+
+                                .save-button {
+                                    @include modalButton(12px, green)
+                                }
+                            }
+
+                        }
+                    }
+                }
+
             }
         }
         

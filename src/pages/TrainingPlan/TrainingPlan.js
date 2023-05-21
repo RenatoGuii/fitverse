@@ -1,10 +1,44 @@
+import { useState } from "react";
+
 // Images
 import tp1 from "../../assets/images/tp1.jpg";
 import tp2 from "../../assets/images/tp2.jpg";
 import tp3 from "../../assets/images/tp3.jpg";
 import tp4 from "../../assets/images/tp4.jpg";
 
+// Icon
+import { AiOutlineCloseCircle } from "react-icons/ai";
+
 const TrainingPlan = () => {
+  const [muscle, setMuscle] = useState("");
+  const [type, setType] = useState("");
+  const [level, setLevel] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (muscle !== "" && type !== "" && level !== "") {
+      console.log(muscle);
+      console.log(type);
+      console.log(level);
+    } else if (muscle !== "" && type !== "" && level === "") {
+      console.log(muscle);
+      console.log(type);
+    } else if (muscle !== "" && type === "" && level !== "") {
+      console.log(muscle);
+      console.log(level);
+    } else if (muscle !== "" && type === "" && level === "") {
+      console.log(muscle);
+    } else if (muscle === "") {
+      console.log("escolha um primeiro");
+    }
+
+    // resetar valores
+    setMuscle("");
+    setType("");
+    setLevel("");
+  };
+
   const teste = [
     {
       nome: "teste",
@@ -18,7 +52,7 @@ const TrainingPlan = () => {
       tipo: "tipo2",
       musculo: "musculo2",
       level: "level2",
-      texto: "010101010101010101010",
+      texto: "01010101010101010101001010101010",
     },
   ];
 
@@ -66,11 +100,16 @@ const TrainingPlan = () => {
       <div className="container form">
         <h4>Planejador de treinos</h4>
 
-        <div className="form-tp">
+        <form onSubmit={handleSubmit} className="form-tp">
           <div className="input-form">
-            <label for="type">Musculo (Obrigatório)</label>
-            <select id="tipo" className="form-select">
-              <option className="selected-op" selected>
+            <label htmlFor="type">Musculo (Obrigatório)</label>
+            <select
+              id="tipo"
+              className="form-select"
+              onChange={(e) => setMuscle(e.target.value)}
+              value={muscle}
+            >
+              <option value="" className="selected-op">
                 Escolha
               </option>
               <option value="abdominals">Abdômen</option>
@@ -92,9 +131,14 @@ const TrainingPlan = () => {
             </select>
           </div>
           <div className="input-form">
-            <label for="type">Tipo de treino (Opcional)</label>
-            <select id="type" class="form-select">
-              <option className="selected-op" selected>
+            <label htmlFor="type">Tipo de treino (Opcional)</label>
+            <select
+              id="type"
+              className="form-select"
+              onChange={(e) => setType(e.target.value)}
+              value={type}
+            >
+              <option value="" className="selected-op">
                 Escolha
               </option>
               <option value="stretching">Alongamento</option>
@@ -109,9 +153,14 @@ const TrainingPlan = () => {
             </select>
           </div>
           <div className="input-form">
-            <label for="type">Nível (Opcional)</label>
-            <select id="tipo" class="form-select">
-              <option className="selected-op" selected>
+            <label htmlFor="type">Nível (Opcional)</label>
+            <select
+              id="tipo"
+              className="form-select"
+              onChange={(e) => setLevel(e.target.value)}
+              value={level}
+            >
+              <option value="" className="selected-op">
                 Escolha
               </option>
               <option value="beginner">Iniciante</option>
@@ -119,8 +168,8 @@ const TrainingPlan = () => {
               <option value="expert">Expert</option>
             </select>
           </div>
-            <input className="search-button" type="submit" value="Pesquisar" />
-        </div>
+          <input className="search-button" type="submit" value="Pesquisar" />
+        </form>
 
         <div className="results-form">
           <h4>Resultados:</h4>
@@ -128,7 +177,7 @@ const TrainingPlan = () => {
           <div className="row">
             {teste &&
               teste.map((item, index) => (
-                <div className="result-item my-2 col-6">
+                <div key={index} className="result-item my-2 col-6">
                   <p className="name-item">{item.nome}</p>
                   <p className="type-item">
                     Tipo: <span>{item.nome}</span>
@@ -147,41 +196,43 @@ const TrainingPlan = () => {
                   />
 
                   <div
-                    class="modal fade"
+                    className="modal fade"
                     id={`modal-item${index}`}
-                    tabindex="-1"
+                    tabIndex="-1"
                     aria-labelledby={`#modal-label-item${index}`}
                     aria-hidden="true"
                   >
                     {/* Modal */}
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
+                    <div className="modal-dialog">
+                      <div className="modal-content">
+                        <div className="header-modal">
                           <h5
-                            class="modal-title"
+                            className="modal-title"
                             id={`modal-label-item${index}`}
                           >
                             {item.nome}
                           </h5>
-                          <button
-                            type="button"
-                            class="btn-close"
+
+                          <AiOutlineCloseCircle
+                            className="close-button"
                             data-bs-dismiss="modal"
                             aria-label="Close"
-                          ></button>
+                          />
                         </div>
-                        <div class="modal-body">
+                        <div className="body-modal">
                           <p>{item.texto}</p>
                         </div>
-                        <div class="modal-footer">
+                        <div className="footer-modal">
                           <button
                             type="button"
-                            class="btn btn-secondary"
+                            className="close-button2"
                             data-bs-dismiss="modal"
                           >
                             Fechar
                           </button>
-                          <button type="button" class="btn btn-primary">
+
+                          {/* BD - Favoritos */}
+                          <button type="button" className="save-button">
                             Salvar
                           </button>
                         </div>

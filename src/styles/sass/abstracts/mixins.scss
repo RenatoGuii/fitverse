@@ -34,3 +34,12 @@
         transition: 0.5s;
     }
 }
+
+@mixin modalButton ($size, $color) {
+    background-color: $color;
+    border: none;
+    border-radius: 5px;
+    color: $White;
+    font-size: $size;
+    padding: 5px 5px;
+}

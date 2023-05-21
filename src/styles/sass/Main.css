@@ -155,6 +155,58 @@
   border-color: rgb(1, 1, 52);
   transition: 0.5s;
 }
+.container.form .results-form .row .result-item .modal.fade.show .modal-dialog .modal-content .header-modal {
+  background-color: rgb(1, 1, 52);
+  position: relative;
+}
+.container.form .results-form .row .result-item .modal.fade.show .modal-dialog .modal-content .header-modal .modal-title {
+  text-align: center;
+  padding: 10px 0;
+  color: #FBFBFD;
+}
+.container.form .results-form .row .result-item .modal.fade.show .modal-dialog .modal-content .header-modal .close-button {
+  color: #FBFBFD;
+  cursor: pointer;
+  font-size: 25px;
+  position: absolute;
+  right: 2%;
+  top: 25%;
+  transition: 0.3s;
+}
+.container.form .results-form .row .result-item .modal.fade.show .modal-dialog .modal-content .header-modal .close-button:hover {
+  opacity: 0.5;
+  transition: 0.3s;
+}
+.container.form .results-form .row .result-item .modal.fade.show .modal-dialog .modal-content .body-modal {
+  background-color: #FBFBFD;
+  padding: 0 10px;
+}
+.container.form .results-form .row .result-item .modal.fade.show .modal-dialog .modal-content .body-modal p {
+  word-wrap: break-word;
+}
+.container.form .results-form .row .result-item .modal.fade.show .modal-dialog .modal-content .footer-modal {
+  background-color: rgb(1, 1, 52);
+  display: flex;
+  justify-content: end;
+  padding: 10px;
+}
+.container.form .results-form .row .result-item .modal.fade.show .modal-dialog .modal-content .footer-modal .close-button2 {
+  background-color: rgba(255, 0, 0, 0.625);
+  border: none;
+  border-radius: 5px;
+  color: #FBFBFD;
+  font-size: 12px;
+  padding: 5px 5px;
+  margin-right: 15px;
+}
+.container.form .results-form .row .result-item .modal.fade.show .modal-dialog .modal-content .footer-modal .save-button {
+  background-color: green;
+  border: none;
+  border-radius: 5px;
+  color: #FBFBFD;
+  font-size: 12px;
+  padding: 5px 5px;
+}
 
 .container-navbar {
   background-color: #0D0D0D;
@@ -225,6 +277,39 @@
   transition: 0.5s;
 }
 
+::-webkit-scrollbar {
+  background-color: #0D0D0D;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #FFB627;
+  width: 7px;
+}
+
+@media (max-width: 165px) {
+  .modal.fade.show .modal-dialog .modal-content .header-modal .modal-title {
+    text-align: center;
+    padding: 10px 0;
+    color: #FBFBFD;
+  }
+  .modal.fade.show .modal-dialog .modal-content .header-modal .close-button {
+    display: none;
+  }
+  .modal.fade.show .modal-dialog .modal-content .footer-modal {
+    flex-direction: column;
+    align-items: center;
+  }
+  .modal.fade.show .modal-dialog .modal-content .footer-modal .close-button2 {
+    background-color: rgba(255, 0, 0, 0.625);
+    border: none;
+    border-radius: 5px;
+    color: #FBFBFD;
+    font-size: 12px;
+    padding: 5px 5px;
+    margin: 0 0 10px 0 !important;
+  }
+}
 @media (max-width: 576px) {
   nav {
     background-color: #0D0D0D;
@@ -240,7 +325,7 @@
     background-color: #0D0D0D;
     border-left: 3px solid #FFB627;
     flex-direction: column;
-    height: calc(100vh - 68.9px);
+    height: calc(100vh - 100%);
     justify-content: space-around;
     padding: 0;
     position: absolute;
