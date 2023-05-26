@@ -27,7 +27,6 @@
 
                     .close-button2 {
                         @include modalButton(12px, rgba(255, 0, 0, 0.625));
-                        margin: 0 0 10px 0 !important;
                     }
                 }
             }
@@ -182,7 +181,9 @@
 
     .container.form {
         .results-form {
-            .row {
+            .row.results {
+                padding: 10px 0;
+
                 .result-item {
                     margin: auto;
                 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Images
 import tp1 from "../../assets/images/tp1.jpg";
@@ -13,17 +13,84 @@ const TrainingPlan = () => {
   const [muscle, setMuscle] = useState("");
   const [type, setType] = useState("");
   const [level, setLevel] = useState("");
+  const [favoritePlans, setFavoritePlans] = useState([]);
 
-  const [muscleError, setMuscleError] = useState(false);
+  const [searchClicked, setSearchClicked] = useState(false);
+  const [emptyFields, setEmptyFields] = useState([]);
+
+  const [editButtonActive, setEditButtonActive] = useState(false);
+  const [deleteCardActive, setDeleteCardActive] = useState([]);
+
+  const alertSaveEdits = () => {
+    window.confirm("Deseja salvar as alterações?");
+  };
+
+  const editButtonActivation = () => {
+    setEditButtonActive(!editButtonActive);
+  };
+
+  const deleteCardActivation = (index) => {
+    setDeleteCardActive((prevState) => {
+      const updatedDeleteCardActive = [...prevState];
+      updatedDeleteCardActive[index] = !updatedDeleteCardActive[index];
+      return updatedDeleteCardActive;
+    });
+  };
+
+  const cancelButtonActivation = () => {
+    setDeleteCardActive([]);
+  };
+
+  useEffect(() => {
+    console.log(favoritePlans);
+  }, [favoritePlans]);
+
+  const handleSavePlan = () => {
+    const allCardsHidden = teste.every((item) => item.display === "none");
+
+    if (allCardsHidden) {
+      alert(
+        "Não é possível confirmar o plano, pois não há treinos para salvar."
+      );
+    } else {
+      const confirmed = window.confirm(
+        "Deseja confirmar o salvamento do plano?"
+      );
+
+      if (confirmed) {
+        const addPlan = teste
+          .filter((item, index) => !deleteCardActive[index])
+          .map((item) => ({ ...item }));
+        setFavoritePlans((prevFavoritePlans) => [
+          ...prevFavoritePlans,
+          addPlan,
+        ]);
+      }
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
+    const emptyFieldsArr = [];
+
     if (muscle === "") {
-      setMuscleError(true);
-      console.log("Escolha um primeiro");
+      emptyFieldsArr.push("muscle");
+    }
+    if (type === "") {
+      emptyFieldsArr.push("type");
+    }
+    if (level === "") {
+      emptyFieldsArr.push("level");
+    }
+
+    if (emptyFieldsArr.length > 0) {
+      setEmptyFields(emptyFieldsArr);
+      setSearchClicked(true);
+      alert("Preencha os campos primeiro!");
     } else {
-      setMuscleError(false);
+      setEmptyFields([]);
+      setSearchClicked(false);
       console.log(muscle);
       console.log(type);
       console.log(level);
@@ -32,7 +99,6 @@ const TrainingPlan = () => {
       setLevel("");
     }
   };
-  
 
   const teste = [
     {
@@ -97,10 +163,14 @@ const TrainingPlan = () => {
 
         <form onSubmit={handleSubmit} className="form-tp">
           <div className="input-form">
-            <label htmlFor="type">Musculo (Obrigatório)</label>
+            <label htmlFor="type">Musculo</label>
             <select
               id="tipo"
-              className={muscleError ? "form-select error" : "form-select"}
+              className={
+                searchClicked && emptyFields.includes("muscle")
+                  ? "form-select error"
+                  : "form-select"
+              }
               onChange={(e) => setMuscle(e.target.value)}
               value={muscle}
             >
@@ -126,10 +196,14 @@ const TrainingPlan = () => {
             </select>
           </div>
           <div className="input-form">
-            <label htmlFor="type">Tipo de treino (Opcional)</label>
+            <label htmlFor="type">Tipo de treino</label>
             <select
               id="type"
-              className="form-select"
+              className={
+                searchClicked && emptyFields.includes("type")
+                  ? "form-select error"
+                  : "form-select"
+              }
               onChange={(e) => setType(e.target.value)}
               value={type}
             >
@@ -148,10 +222,14 @@ const TrainingPlan = () => {
             </select>
           </div>
           <div className="input-form">
-            <label htmlFor="type">Nível (Opcional)</label>
+            <label htmlFor="type">Nível</label>
             <select
               id="tipo"
-              className="form-select"
+              className={
+                searchClicked && emptyFields.includes("level")
+                  ? "form-select error"
+                  : "form-select"
+              }
               onChange={(e) => setLevel(e.target.value)}
               value={level}
             >
@@ -167,13 +245,56 @@ const TrainingPlan = () => {
         </form>
 
         <div className="results-form">
-
           <h4>Resultados:</h4>
 
-          <div className="row">
+          <div className="row results">
+            <div className="action-buttons">
+              <button
+                className={
+                  editButtonActive ? "save-button-active" : "save-button"
+                }
+                onClick={() => {
+                  editButtonActivation();
+                  alertSaveEdits();
+                }}
+              >
+                Salvar
+              </button>
+
+              <button
+                className={!editButtonActive ? "edit-button" : "reset-button"}
+                onClick={
+                  !editButtonActive
+                    ? editButtonActivation
+                    : () => {
+                        editButtonActivation();
+                        cancelButtonActivation();
+                      }
+                }
+              >
+                {!editButtonActive ? "Editar" : "Resetar"}
+              </button>
+            </div>
+
             {teste &&
               teste.map((item, index) => (
-                <div key={index} className="result-item my-2 col-6">
+                <div
+                  key={index}
+                  id={`card-${index}`}
+                  className={`result-item my-2 col-6`}
+                  style={{
+                    display: deleteCardActive[index] ? "none" : "block",
+                  }}
+                >
+                  {editButtonActive ? (
+                    <AiOutlineCloseCircle
+                      className="delete-training-button"
+                      onClick={() => deleteCardActivation(index)}
+                    />
+                  ) : (
+                    ""
+                  )}
+
                   <p className="name-item">{item.nome}</p>
                   <p className="type-item">
                     Tipo: <span>{item.nome}</span>
@@ -226,17 +347,24 @@ const TrainingPlan = () => {
                           >
                             Fechar
                           </button>
-
-                          {/* BD - Favoritos */}
-                          <button type="button" className="save-button">
-                            Salvar
-                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               ))}
+
+            <div className="save-plan-div">
+              <button
+                style={{
+                  display: !editButtonActive ? "block" : "none",
+                }}
+                className="save-plan-button"
+                onClick={handleSavePlan}
+              >
+                SALVAR PLANO
+              </button>
+            </div>
           </div>
         </div>
       </div>
