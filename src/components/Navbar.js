@@ -58,7 +58,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link to={"/trainingPlan"} className="nav-link active">
-                Plano de Treinos
+                Exercícios
               </Link>
             </li>
             <li className="nav-item">

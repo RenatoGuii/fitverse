@@ -1,39 +1,6 @@
 // Mobile
 
 // SM
-@media (max-width: 165px) {
-    
-    // TrainingPlan
-    .modal.fade.show {
-        .modal-dialog {
-            .modal-content {
-                .header-modal {
-
-                    .modal-title {
-                        text-align: center;
-                        padding: 10px 0;
-                        color: $White;
-                    }
-
-                    .close-button {
-                        display: none;
-                    }
-
-                }
-
-                .footer-modal {
-                    flex-direction: column;
-                    align-items: center;
-
-                    .close-button2 {
-                        @include modalButton(12px, rgba(255, 0, 0, 0.625));
-                    }
-                }
-            }
-        }
-    }
-}
-
 @media (max-width: 576px) {
 
     // Navbar
@@ -115,7 +82,9 @@
             }
         }
 
-        
+        .modal-title {
+            font-size: 15px;
+        }
     }
 }
 

@@ -1,25 +1,21 @@
 import axios from "axios";
 
-const dataOption = (muscleChoice, typeChoice, levelChoice) => {
+const dataOption = (muscleChoice) => {
   const options = {
     method: "GET",
-    url: "https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises",
-    params: {
-      type: typeChoice,
-      muscle: muscleChoice,
-      difficulty: levelChoice,
-    },
+    url: `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${muscleChoice}`,
     headers: {
       "X-RapidAPI-Key": "57996be828msh986f446112d7c93p1e56fajsn95c27087f48a",
-      "X-RapidAPI-Host": "exercises-by-api-ninjas.p.rapidapi.com",
+      "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
     },
   };
+
   return options;
 };
 
-const getData = async (muscle, type, level) => {
+const getData = async (muscle) => {
   try {
-    const response = await axios.request(dataOption(muscle, type, level));
+    const response = await axios.request(dataOption(muscle));
     return response.data;
   } catch (error) {
     console.error(error);
