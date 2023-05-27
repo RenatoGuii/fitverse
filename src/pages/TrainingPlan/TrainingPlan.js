@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import getData from "../../APIs/useApiExercise";
 
 // Images
 import tp1 from "../../assets/images/tp1.jpg";
@@ -13,61 +14,13 @@ const TrainingPlan = () => {
   const [muscle, setMuscle] = useState("");
   const [type, setType] = useState("");
   const [level, setLevel] = useState("");
+  const [data, setData] = useState(null);
   const [favoritePlans, setFavoritePlans] = useState([]);
-
-  const [searchClicked, setSearchClicked] = useState(false);
   const [emptyFields, setEmptyFields] = useState([]);
-
-  const [editButtonActive, setEditButtonActive] = useState(false);
   const [deleteCardActive, setDeleteCardActive] = useState([]);
 
-  const alertSaveEdits = () => {
-    window.confirm("Deseja salvar as alterações?");
-  };
-
-  const editButtonActivation = () => {
-    setEditButtonActive(!editButtonActive);
-  };
-
-  const deleteCardActivation = (index) => {
-    setDeleteCardActive((prevState) => {
-      const updatedDeleteCardActive = [...prevState];
-      updatedDeleteCardActive[index] = !updatedDeleteCardActive[index];
-      return updatedDeleteCardActive;
-    });
-  };
-
-  const cancelButtonActivation = () => {
-    setDeleteCardActive([]);
-  };
-
-  useEffect(() => {
-    console.log(favoritePlans);
-  }, [favoritePlans]);
-
-  const handleSavePlan = () => {
-    const allCardsHidden = teste.every((item) => item.display === "none");
-
-    if (allCardsHidden) {
-      alert(
-        "Não é possível confirmar o plano, pois não há treinos para salvar."
-      );
-    } else {
-      const confirmed = window.confirm(
-        "Deseja confirmar o salvamento do plano?"
-      );
-
-      if (confirmed) {
-        const addPlan = teste
-          .filter((item, index) => !deleteCardActive[index])
-          .map((item) => ({ ...item }));
-        setFavoritePlans((prevFavoritePlans) => [
-          ...prevFavoritePlans,
-          addPlan,
-        ]);
-      }
-    }
-  };
+  const [searchClicked, setSearchClicked] = useState(false);
+  const [editButtonActive, setEditButtonActive] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -89,33 +42,71 @@ const TrainingPlan = () => {
       setSearchClicked(true);
       alert("Preencha os campos primeiro!");
     } else {
+      getData(muscle, type, level)
+        .then((response) => {
+          setData(response);
+          console.log(response);
+        })
+        .catch((error) => console.error(error));
+
       setEmptyFields([]);
       setSearchClicked(false);
-      console.log(muscle);
-      console.log(type);
-      console.log(level);
       setMuscle("");
       setType("");
       setLevel("");
     }
   };
 
-  const teste = [
-    {
-      nome: "teste",
-      tipo: "tipo",
-      musculo: "musculo",
-      level: "level",
-      texto: "kdkdkdkdkdkdkdkdkdkd",
-    },
-    {
-      nome: "teste2",
-      tipo: "tipo2",
-      musculo: "musculo2",
-      level: "level2",
-      texto: "01010101010101010101001010101010",
-    },
-  ];
+  const editButtonActivation = () => {
+    setEditButtonActive(!editButtonActive);
+  };
+
+  const alertSaveEdits = () => {
+    window.confirm("Deseja salvar as alterações?");
+  };
+
+  const cancelButtonActivation = () => {
+    setDeleteCardActive([]);
+  };
+
+  const deleteCardActivation = (index) => {
+    setDeleteCardActive((prevState) => {
+      const updatedDeleteCardActive = [...prevState];
+      updatedDeleteCardActive[index] = !updatedDeleteCardActive[index];
+      return updatedDeleteCardActive;
+    });
+  };
+
+  const handleSavePlan = () => {
+    const confirmed = window.confirm("Deseja confirmar o salvamento do plano?");
+
+    if (confirmed) {
+      const allItemsHidden = data.every(
+        (item, index) => deleteCardActive[index]
+      );
+
+      if (allItemsHidden) {
+        alert(
+          "Nenhum item selecionado. Selecione pelo menos um item para salvar o plano."
+        );
+      } else {
+        const addPlan = data
+          .filter((item, index) => !deleteCardActive[index])
+          .map((item) => ({ ...item }));
+        setFavoritePlans((prevFavoritePlans) => [
+          ...prevFavoritePlans,
+          addPlan,
+        ]);
+
+        setData(null);
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Mandar para o BD
+    console.log(favoritePlans);
+  }, [favoritePlans]);
 
   return (
     <div>
@@ -125,7 +116,7 @@ const TrainingPlan = () => {
             Monte seu plano <br /> de treinos
           </h2>
           <p>
-            Utilize nosso sistema para montar seu plano de treino baseado nos
+            Utilize nosso banco de exercícios para montar seu plano de treino baseado nos
             filtros que você mais gosta.
           </p>
         </div>
@@ -244,129 +235,132 @@ const TrainingPlan = () => {
           <input className="search-button" type="submit" value="Pesquisar" />
         </form>
 
-        <div className="results-form">
-          <h4>Resultados:</h4>
+        {data ? (
+          <div className="results-form">
+            <h4>Resultados:</h4>
 
-          <div className="row results">
-            <div className="action-buttons">
-              <button
-                className={
-                  editButtonActive ? "save-button-active" : "save-button"
-                }
-                onClick={() => {
-                  editButtonActivation();
-                  alertSaveEdits();
-                }}
-              >
-                Salvar
-              </button>
-
-              <button
-                className={!editButtonActive ? "edit-button" : "reset-button"}
-                onClick={
-                  !editButtonActive
-                    ? editButtonActivation
-                    : () => {
-                        editButtonActivation();
-                        cancelButtonActivation();
-                      }
-                }
-              >
-                {!editButtonActive ? "Editar" : "Resetar"}
-              </button>
-            </div>
-
-            {teste &&
-              teste.map((item, index) => (
-                <div
-                  key={index}
-                  id={`card-${index}`}
-                  className={`result-item my-2 col-6`}
-                  style={{
-                    display: deleteCardActive[index] ? "none" : "block",
+            <div className="row results">
+              <div className="action-buttons">
+                <button
+                  className={
+                    editButtonActive ? "save-button-active" : "save-button"
+                  }
+                  onClick={() => {
+                    editButtonActivation();
+                    alertSaveEdits();
                   }}
                 >
-                  {editButtonActive ? (
-                    <AiOutlineCloseCircle
-                      className="delete-training-button"
-                      onClick={() => deleteCardActivation(index)}
-                    />
-                  ) : (
-                    ""
-                  )}
+                  Salvar
+                </button>
 
-                  <p className="name-item">{item.nome}</p>
-                  <p className="type-item">
-                    Tipo: <span>{item.nome}</span>
-                  </p>
-                  <p className="muscle-item">
-                    Muscúlo: <span>{item.musculo}</span>
-                  </p>
-                  <p className="level-item">
-                    Dificuldade: <span>{item.level}</span>
-                  </p>
-                  <input
-                    type="submit"
-                    value="ver mais"
-                    data-bs-toggle="modal"
-                    data-bs-target={`#modal-item${index}`}
-                  />
+                <button
+                  className={!editButtonActive ? "edit-button" : "reset-button"}
+                  onClick={
+                    !editButtonActive
+                      ? editButtonActivation
+                      : () => {
+                          editButtonActivation();
+                          cancelButtonActivation();
+                        }
+                  }
+                >
+                  {!editButtonActive ? "Editar" : "Resetar"}
+                </button>
+              </div>
 
+              {data &&
+                data.map((item, index) => (
                   <div
-                    className="modal fade"
-                    id={`modal-item${index}`}
-                    tabIndex="-1"
-                    aria-labelledby={`#modal-label-item${index}`}
-                    aria-hidden="true"
+                    key={index}
+                    id={`card-${index}`}
+                    className={`result-item my-2 col-6`}
+                    style={{
+                      display: deleteCardActive[index] ? "none" : "block",
+                    }}
                   >
-                    {/* Modal */}
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-                        <div className="header-modal">
-                          <h5
-                            className="modal-title"
-                            id={`modal-label-item${index}`}
-                          >
-                            {item.nome}
-                          </h5>
+                    {editButtonActive ? (
+                      <AiOutlineCloseCircle
+                        className="delete-training-button"
+                        onClick={() => deleteCardActivation(index)}
+                      />
+                    ) : (
+                      ""
+                    )}
 
-                          <AiOutlineCloseCircle
-                            className="close-button"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          />
-                        </div>
-                        <div className="body-modal">
-                          <p>{item.texto}</p>
-                        </div>
-                        <div className="footer-modal">
-                          <button
-                            type="button"
-                            className="close-button2"
-                            data-bs-dismiss="modal"
-                          >
-                            Fechar
-                          </button>
+                    <p className="name-item">{item.name}</p>
+                    <p className="type-item">
+                      Tipo: <span>{item.type}</span>
+                    </p>
+                    <p className="muscle-item">
+                      Muscúlo: <span>{item.muscle}</span>
+                    </p>
+                    <p className="level-item">
+                      Dificuldade: <span>{item.difficulty}</span>
+                    </p>
+                    <input
+                      type="submit"
+                      value="ver mais"
+                      data-bs-toggle="modal"
+                      data-bs-target={`#modal-item${index}`}
+                    />
+
+                    <div
+                      className="modal fade"
+                      id={`modal-item${index}`}
+                      tabIndex="-1"
+                      aria-labelledby={`#modal-label-item${index}`}
+                      aria-hidden="true"
+                    >
+                      {/* Modal */}
+                      <div className="modal-dialog">
+                        <div className="modal-content">
+                          <div className="header-modal">
+                            <h5
+                              className="modal-title"
+                              id={`modal-label-item${index}`}
+                            >
+                              {item.name}
+                            </h5>
+
+                            <AiOutlineCloseCircle
+                              className="close-button"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            />
+                          </div>
+                          <div className="body-modal">
+                            <p>{item.instructions}</p>
+                          </div>
+                          <div className="footer-modal">
+                            <button
+                              type="button"
+                              className="close-button2"
+                              data-bs-dismiss="modal"
+                            >
+                              Fechar
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-
-            <div className="save-plan-div">
-              <button
-                style={{
-                  display: !editButtonActive ? "block" : "none",
-                }}
-                className="save-plan-button"
-                onClick={handleSavePlan}
-              >
-                SALVAR PLANO
-              </button>
+                ))}
+              <div className="save-plan-div">
+                <button
+                  style={{
+                    display: !editButtonActive ? "block" : "none",
+                  }}
+                  className="save-plan-button"
+                  onClick={handleSavePlan}
+                >
+                  SALVAR PLANO
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

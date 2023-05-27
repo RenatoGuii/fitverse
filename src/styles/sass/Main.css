@@ -155,7 +155,7 @@
 }
 .container.form .results-form .row.results .result-item {
   border: 2px solid rgb(1, 1, 41);
-  margin-right: 8px;
+  margin: auto;
   position: relative;
   width: 230px;
 }
@@ -175,6 +175,7 @@
 .container.form .results-form .row.results .result-item p {
   padding: 10px 0;
   margin: 0;
+  word-break: break-all;
 }
 .container.form .results-form .row.results .result-item .name-item {
   background-color: rgb(1, 1, 41);
@@ -194,6 +195,9 @@
 .container.form .results-form .row.results .result-item .level-item span {
   font-weight: 400;
 }
+.container.form .results-form .row.results .result-item .level-item {
+  margin-bottom: 70px;
+}
 .container.form .results-form .row.results .result-item input {
   background-color: rgb(1, 1, 41);
   border: 1px solid transparent;
@@ -205,7 +209,10 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: 0.5s;
-  margin: 10px auto;
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .container.form .results-form .row.results .result-item input:hover {
   background-color: #FBFBFD;
@@ -465,9 +472,6 @@
   }
   .container.form .results-form .row.results {
     padding: 10px 0;
-  }
-  .container.form .results-form .row.results .result-item {
-    margin: auto;
   }
 }
 @media (max-width: 993px) {
