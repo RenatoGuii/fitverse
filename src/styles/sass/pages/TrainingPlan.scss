@@ -167,7 +167,7 @@
 
                 p {
                     margin: 0;
-                    word-break: break-all;
+                    word-break: keep-all;
                 }
                 
                 .name-item {
@@ -183,8 +183,9 @@
                 .type-item,
                 .target-item,
                 .equipment-item {
-                    padding: 8px 5px;
                     font-weight: 700;
+                    padding: 8px 5px;
+                    text-transform: capitalize;
     
                     span {
                         font-weight: 400;

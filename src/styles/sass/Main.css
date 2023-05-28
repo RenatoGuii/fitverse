@@ -169,7 +169,7 @@
 }
 .container.form .results-form .row.results .result-item p {
   margin: 0;
-  word-break: break-all;
+  word-break: keep-all;
 }
 .container.form .results-form .row.results .result-item .name-item {
   background-color: rgb(1, 1, 41);
@@ -183,8 +183,9 @@
 .container.form .results-form .row.results .result-item .type-item,
 .container.form .results-form .row.results .result-item .target-item,
 .container.form .results-form .row.results .result-item .equipment-item {
-  padding: 8px 5px;
   font-weight: 700;
+  padding: 8px 5px;
+  text-transform: capitalize;
 }
 .container.form .results-form .row.results .result-item .type-item span,
 .container.form .results-form .row.results .result-item .target-item span,

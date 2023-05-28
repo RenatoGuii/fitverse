@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
+
+// APIs
 import getData from "../../APIs/useApiExercise";
+import getDataTranslate from "../../APIs/useApiTranslate";
 
 // Images
 import tp1 from "../../assets/images/tp1.jpg";
@@ -18,60 +21,101 @@ const TrainingPlan = () => {
   const [emptyFields, setEmptyFields] = useState([]);
 
   // activation variables
+  const [loading, setLoading] = useState(false);
   const [noResultsFound, setNoResultsFound] = useState(false);
   const [searchClicked, setSearchClicked] = useState(false);
-  const [alreadyFavorited, setAlreadyFavorited] = useState(false);
 
+  
+  // function responsible for searching the exercises through an API call
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    
     const emptyFieldsArr = [];
-
+    
     if (type === "") {
       emptyFieldsArr.push("type");
     }
-
+    
     if (emptyFieldsArr.length > 0) {
       setEmptyFields(emptyFieldsArr);
       setSearchClicked(true);
       alert("Preencha os campos primeiro!");
     } else {
+      setLoading(true);
+      
       getData(type)
-        .then((response) => {
-          if (response && response.length > 0) {
-            setData(response);
-            console.log(response);
-          } else {
-            setData([]);
-            setNoResultsFound(true);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
+      .then((response) => {
+        if (response && response.length > 0) {
+          const translatedString = dataTranslation(response);
+          getDataTranslate(translatedString).then((response) => {
+            setData(dataChangeFormat(response));
+            setLoading(false);
+          });
+        } else {
+          setData([]);
           setNoResultsFound(true);
-        });
-
+          setLoading(false);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setNoResultsFound(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+      
       setEmptyFields([]);
       setSearchClicked(true);
       setType("");
     }
   };
 
+  // function where we transform an array of objects into a string with the Object values, then translated by the API, and then becomes an array with translated strings
+  const dataTranslation = (array) => {
+    const itemTexts = array.map((item) => {
+      const itemFiltering = {
+        name: item.name,
+        bodyPart: item.bodyPart,
+        target: item.target,
+        equipment: item.equipment,
+        gifUrl: item.gifUrl,
+      };
+
+      return Object.values(itemFiltering).join(", ");
+    });
+
+    const concatenatedText = itemTexts.join(" | ");
+
+    const stringToArray = concatenatedText.split(" | ");
+
+    return stringToArray;
+  };
+
+  // function where we transform the translated array strings into arrays
+  const dataChangeFormat = (array) => {
+    const itemText = array.map((item) => {
+      const stringToArray = item.split(", ");
+      return stringToArray;
+    });
+
+    return itemText;
+  };
+  
+  // Function that saves exercises in a favorites tab
   const handleSaveExercise = (index) => {
     const confirmed = window.confirm(
       "Deseja adicionar o treino aos seus treinos favoritos?"
     );
-
+    
     if (confirmed) {
       const selectedExercise = data[index];
-
-      // Verifica se o item já está nos favoritos
+      
       const isAlreadyFavorited = favoriteExercise.some(
-        (item) => item.name === selectedExercise.name
-      );
-
-      if (!isAlreadyFavorited) {
-        // Adiciona o novo item aos favoritos
+        (item) => item[0] === selectedExercise[0]
+        );
+        
+        if (!isAlreadyFavorited) {
         setFavoriteExercise((prevFavoriteExercise) => [
           ...prevFavoriteExercise,
           selectedExercise,
@@ -80,6 +124,7 @@ const TrainingPlan = () => {
     }
   };
 
+  // function that deletes exercises from the favorites tab
   const handleRemoveFavoriteExercise = (index) => {
     const confirmed = window.confirm(
       "Deseja excluir esse treino dos seus favoritos?"
@@ -166,11 +211,16 @@ const TrainingPlan = () => {
               <option value="chest">Peito</option>
               <option value="lower legs">Pernas (Inferior)</option>
               <option value="upper legs">Pernas (Superior)</option>
-              <option value="neck">Pescoço</option>
             </select>
           </div>
 
-          <input className="search-button" type="submit" value="Pesquisar" />
+          <input
+            className="search-button"
+            type="submit"
+            value="Pesquisar"
+            style={{ display: loading ? "none" : "block" }}
+            disabled={loading}
+          />
         </form>
 
         {data && data.length > 0 ? (
@@ -187,7 +237,7 @@ const TrainingPlan = () => {
                   >
                     {/* Icons Favorite */}
                     {favoriteExercise.some(
-                      (favorite) => favorite.name === item.name
+                      (favorite) => favorite[0] === item[0]
                     ) ? (
                       <AiFillStar
                         onClick={() => handleRemoveFavoriteExercise(index)}
@@ -200,15 +250,15 @@ const TrainingPlan = () => {
                       />
                     )}
 
-                    <p className="name-item">{item.name}</p>
+                    <p className="name-item">{item[0]}</p>
                     <p className="type-item">
-                      Tipo: <span>{item.bodyPart}</span>
+                      Tipo: <span>{item[1]}</span>
                     </p>
                     <p className="target-item">
-                      Grupo alvo: <span>{item.target}</span>
+                      Grupo alvo: <span>{item[2]}</span>
                     </p>
                     <p className="equipment-item">
-                      Equipamento: <span>{item.equipment}</span>
+                      Equipamento: <span>{item[3]}</span>
                     </p>
                     <input
                       type="submit"
@@ -232,13 +282,13 @@ const TrainingPlan = () => {
                               className="modal-title"
                               id={`modal-label-item${index}`}
                             >
-                              {item.name}
+                              {item[0]}
                             </h5>
                           </div>
                           <div className="body-modal">
                             <img
                               className="gif-exercise"
-                              src={item.gifUrl}
+                              src={item[4]}
                               alt="gif-exercise"
                             />
                           </div>
