@@ -15,6 +15,7 @@ import { AiFillStar } from "react-icons/ai";
 import { AiOutlineStar } from "react-icons/ai";
 
 const TrainingPlan = () => {
+  // variables
   const [type, setType] = useState("");
   const [data, setData] = useState(null);
   const [favoriteExercise, setFavoriteExercise] = useState([]);
@@ -25,46 +26,47 @@ const TrainingPlan = () => {
   const [noResultsFound, setNoResultsFound] = useState(false);
   const [searchClicked, setSearchClicked] = useState(false);
 
-  
+  // pagination variables
+
   // function responsible for searching the exercises through an API call
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const emptyFieldsArr = [];
-    
+
     if (type === "") {
       emptyFieldsArr.push("type");
     }
-    
+
     if (emptyFieldsArr.length > 0) {
       setEmptyFields(emptyFieldsArr);
       setSearchClicked(true);
       alert("Preencha os campos primeiro!");
     } else {
       setLoading(true);
-      
+
       getData(type)
-      .then((response) => {
-        if (response && response.length > 0) {
-          const translatedString = dataTranslation(response);
-          getDataTranslate(translatedString).then((response) => {
-            setData(dataChangeFormat(response));
+        .then((response) => {
+          if (response && response.length > 0) {
+            const translatedString = dataTranslation(response);
+            getDataTranslate(translatedString).then((response) => {
+              setData(dataChangeFormat(response));
+              setLoading(false);
+            });
+          } else {
+            setData([]);
+            setNoResultsFound(true);
             setLoading(false);
-          });
-        } else {
-          setData([]);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
           setNoResultsFound(true);
+        })
+        .finally(() => {
           setLoading(false);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        setNoResultsFound(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-      
+        });
+
       setEmptyFields([]);
       setSearchClicked(true);
       setType("");
@@ -101,21 +103,21 @@ const TrainingPlan = () => {
 
     return itemText;
   };
-  
+
   // Function that saves exercises in a favorites tab
   const handleSaveExercise = (index) => {
     const confirmed = window.confirm(
       "Deseja adicionar o treino aos seus treinos favoritos?"
     );
-    
+
     if (confirmed) {
       const selectedExercise = data[index];
-      
+
       const isAlreadyFavorited = favoriteExercise.some(
         (item) => item[0] === selectedExercise[0]
-        );
-        
-        if (!isAlreadyFavorited) {
+      );
+
+      if (!isAlreadyFavorited) {
         setFavoriteExercise((prevFavoriteExercise) => [
           ...prevFavoriteExercise,
           selectedExercise,
@@ -218,7 +220,6 @@ const TrainingPlan = () => {
             className="search-button"
             type="submit"
             value="Pesquisar"
-            style={{ display: loading ? "none" : "block" }}
             disabled={loading}
           />
         </form>
