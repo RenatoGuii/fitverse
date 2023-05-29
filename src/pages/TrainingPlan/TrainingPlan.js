@@ -127,21 +127,24 @@ const TrainingPlan = () => {
   };
 
   // function that deletes exercises from the favorites tab
-  const handleRemoveFavoriteExercise = (index) => {
+  const handleRemoveFavoriteExercise = (name) => {
     const confirmed = window.confirm(
       "Deseja excluir esse treino dos seus favoritos?"
     );
 
     if (confirmed) {
-      const updatedFavorites = [...favoriteExercise];
-      updatedFavorites.splice(index, 1);
+      const updatedFavorites = favoriteExercise.filter(
+        (item) => item[0] !== name
+      );
       setFavoriteExercise(updatedFavorites);
     }
   };
 
   useEffect(() => {
     // Mandar para o BD
+    const favoriteExerciseJson = JSON.stringify(favoriteExercise);
     console.log(favoriteExercise);
+    console.log(favoriteExerciseJson);
   }, [favoriteExercise]);
 
   return (
@@ -244,7 +247,7 @@ const TrainingPlan = () => {
                         (favorite) => favorite[0] === item[0]
                       ) ? (
                         <AiFillStar
-                          onClick={() => handleRemoveFavoriteExercise(index)}
+                          onClick={() => handleRemoveFavoriteExercise(item[0])}
                           className="star-favorite"
                         />
                       ) : (
