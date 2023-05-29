@@ -263,6 +263,134 @@
   text-align: center;
 }
 
+.container.imc {
+  padding-top: 68.9px;
+}
+.container.imc h1 {
+  color: rgb(1, 1, 41);
+  font-weight: 800;
+  padding: 3vh 0 5vh 0;
+  text-align: center;
+}
+.container.imc .imc-info .imc-info-h4 {
+  background: linear-gradient(to right, rgb(1, 1, 41), transparent) bottom no-repeat;
+  background-size: 100% 4px;
+  color: rgb(1, 1, 41);
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+.container.imc .imc-info .imc-info-p {
+  font-weight: 500;
+  text-indent: 40px;
+  margin-bottom: 20px;
+}
+.container.imc .imc-form-container .imc-form-h4 {
+  background: linear-gradient(to right, rgb(1, 1, 41), transparent) bottom no-repeat;
+  background-size: 100% 4px;
+  color: rgb(1, 1, 41);
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+.container.imc .imc-form-container .imc-form .imc-form-inputs {
+  display: flex;
+}
+.container.imc .imc-form-container .imc-form .imc-form-inputs .input-item.height {
+  margin-right: 25px;
+}
+.container.imc .imc-form-container .imc-form .imc-form-inputs .input-item {
+  display: flex;
+  flex-direction: column;
+}
+.container.imc .imc-form-container .imc-form .imc-form-inputs .input-item label {
+  color: rgb(1, 1, 41);
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.container.imc .imc-form-container .imc-form .imc-form-inputs .input-item .if-inputs, .container.imc .imc-form-container .imc-form .imc-form-inputs .input-item .if-inputs-error {
+  background-color: #FFB627;
+  border-radius: 5px;
+  border: 2px solid #0D0D0D;
+  padding: 5px;
+  font-weight: 500;
+  width: 100%;
+}
+.container.imc .imc-form-container .imc-form .imc-form-inputs .input-item .if-inputs::placeholder, .container.imc .imc-form-container .imc-form .imc-form-inputs .input-item .if-inputs-error::placeholder {
+  color: #0D0D0D;
+  font-weight: 500;
+}
+.container.imc .imc-form-container .imc-form .imc-form-inputs .input-item .if-inputs:focus, .container.imc .imc-form-container .imc-form .imc-form-inputs .input-item .if-inputs-error:focus {
+  outline: none;
+}
+.container.imc .imc-form-container .imc-form .imc-form-inputs .input-item .if-inputs-error {
+  border-color: red;
+}
+.container.imc .imc-form-container .imc-form .calculate-button {
+  background-color: rgb(1, 1, 41);
+  border: 1px solid transparent;
+  border-radius: 5px;
+  display: block;
+  color: #FBFBFD;
+  font-size: 10px;
+  padding: 8px 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.5s;
+  margin-top: 15px;
+}
+.container.imc .imc-form-container .imc-form .calculate-button:hover {
+  background-color: #FBFBFD;
+  color: rgb(1, 1, 41);
+  border-color: rgb(1, 1, 41);
+  transition: 0.5s;
+}
+.container.imc .imc-form-container .imc-form-result {
+  background-color: #0D0D0D;
+  border-radius: 10px;
+  display: inline-block;
+  margin-top: 30px;
+  padding: 20px 15px;
+}
+.container.imc .imc-form-container .imc-form-result .imc-form-result-h2, .container.imc .imc-form-container .imc-form-result .imc-form-result-p {
+  color: #FBFBFD;
+  font-weight: 600;
+}
+.container.imc .imc-form-container .imc-form-result .imc-form-result-h2 .result-value, .container.imc .imc-form-container .imc-form-result .imc-form-result-h2 .imc-form-result-p .result-class, .container.imc .imc-form-container .imc-form-result .imc-form-result-p .imc-form-result-h2 .result-class, .container.imc .imc-form-container .imc-form-result .imc-form-result-p .result-value, .container.imc .imc-form-container .imc-form-result .imc-form-result-p .result-class {
+  color: #FFB627;
+  font-weight: 800;
+}
+.container.imc .imc-form-container .imc-form-result .imc-form-result-p {
+  font-size: 13px;
+  margin: 0;
+}
+.container.imc .imc-form-container .imc-form-result .imc-form-result-saveButton {
+  background-color: green;
+  border: none;
+  border-radius: 5px;
+  color: #FBFBFD;
+  font-size: 12px;
+  padding: 5px 5px;
+  margin-top: 15px;
+  width: 100%;
+}
+.container.imc .imc-form-container .imc-form-result .imc-form-result-resetButton {
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  color: #FBFBFD;
+  font-size: 12px;
+  padding: 5px 5px;
+  margin-top: 15px;
+  width: 100%;
+}
+.container.imc .imc-form-container .loading-text {
+  color: #0D0D0D;
+  font-weight: 800;
+  padding-top: 45px;
+  text-align: center;
+}
+
 .container-navbar {
   background-color: #0D0D0D;
   border-bottom: 3px solid #FFB627;
@@ -510,6 +638,7 @@
 }
 * {
   font-family: "Open Sans", sans-serif;
+  word-break: keep-all;
 }
 
 body {

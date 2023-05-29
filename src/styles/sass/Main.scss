@@ -5,6 +5,7 @@
 
 // Pages
 @import "../sass/pages/TrainingPlan.scss";
+@import "../sass/pages/Imc.scss";
 
 // Components
 @import "../sass/components/Navbar.scss";
@@ -20,6 +21,7 @@
 // General Styles
 * {
     font-family: $FontMain;
+    word-break: keep-all;
 }
 
 body {

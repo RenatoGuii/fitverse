@@ -1,0 +1,135 @@
+.container.imc {
+    padding-top: 68.9px;
+
+    h1 {
+        color: $Blue;
+        font-weight: 800;
+        padding: 3vh 0 5vh 0;
+        text-align: center;
+    }
+
+    .imc-info {
+        .imc-info-h4 {
+            background: linear-gradient(to right, $Blue, transparent) bottom no-repeat;
+            background-size: 100% 4px;
+            color: $Blue;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .imc-info-p {
+            font-weight: 500;
+            text-indent: 40px;
+            margin-bottom: 20px;
+        }
+    }
+
+    .imc-form-container {
+
+        .imc-form-h4 {
+            background: linear-gradient(to right, $Blue, transparent) bottom no-repeat;
+            background-size: 100% 4px;
+            color: $Blue;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .imc-form {
+            .imc-form-inputs {
+                display: flex;
+                
+                .input-item.height {
+                    margin-right: 25px;
+                }
+    
+                .input-item {
+                    display: flex;
+                    flex-direction: column;
+    
+                    label {
+                        color: $Blue;
+                        font-weight: 500;
+                        margin-bottom: 5px;
+                    }
+    
+                    .if-inputs {
+                        background-color: $Orange;
+                        border-radius: 5px;
+                        border: 2px solid $Black;
+                        padding: 5px;
+                        font-weight: 500;
+                        width: 100%;
+    
+                        &::placeholder {
+                            color: $Black;
+                            font-weight: 500;
+                        }
+    
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+    
+                    .if-inputs-error {
+                        @extend .if-inputs;
+                        border-color: red;
+                    }
+                }
+            }
+    
+            .calculate-button {
+                @include secondaryButton(10px);
+                margin-top: 15px;
+            }
+        }
+
+        .imc-form-result {
+            background-color: $Black;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 30px;
+            padding: 20px 15px;
+
+            .imc-form-result-h2 {
+                color: $White;
+                font-weight: 600;
+
+                .result-value {
+                    color: $Orange;
+                    font-weight: 800;
+                }
+            }
+
+            .imc-form-result-p {
+                @extend .imc-form-result-h2;
+                font-size: 13px;
+                margin: 0;
+
+                .result-class {
+                    @extend .result-value;
+                }
+            }
+
+            .imc-form-result-saveButton {
+                @include modalButton(12px, green);
+                margin-top: 15px;
+                width: 100%;
+            }
+
+            .imc-form-result-resetButton {
+                @include modalButton(12px, red);
+                margin-top: 15px;
+                width: 100%;
+            }
+        }
+
+        .loading-text {
+            color: $Black;
+            font-weight: 800;
+            padding-top: 45px;
+            text-align: center;
+        }
+    }
+}

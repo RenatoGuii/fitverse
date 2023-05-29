@@ -26,8 +26,6 @@ const TrainingPlan = () => {
   const [noResultsFound, setNoResultsFound] = useState(false);
   const [searchClicked, setSearchClicked] = useState(false);
 
-  // pagination variables
-
   // function responsible for searching the exercises through an API call
   const handleSubmit = (e) => {
     e.preventDefault();
