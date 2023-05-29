@@ -230,7 +230,7 @@
 .container.form .results-form .row.results .result-item .modal.fade.show .modal-dialog .modal-content .header-modal .modal-title {
   color: #FBFBFD;
   padding: 10px 40px;
-  word-break: break-all;
+  word-break: keep-all;
   text-align: center;
   text-transform: uppercase;
 }

@@ -224,93 +224,96 @@ const TrainingPlan = () => {
           />
         </form>
 
-        {data && data.length > 0 ? (
-          <div className="results-form">
-            <h4>Resultados:</h4>
+        {loading ? (
+          <p className="loading-text">Carregando...</p>
+        ) : (
+          <div>
+            {data && data.length > 0 ? (
+              <div className="results-form">
+                <h4>Resultados:</h4>
 
-            <div className="row results">
-              {data &&
-                data.map((item, index) => (
-                  <div
-                    key={index}
-                    id={`card-${index}`}
-                    className={`result-item my-2 col-6`}
-                  >
-                    {/* Icons Favorite */}
-                    {favoriteExercise.some(
-                      (favorite) => favorite[0] === item[0]
-                    ) ? (
-                      <AiFillStar
-                        onClick={() => handleRemoveFavoriteExercise(index)}
-                        className="star-favorite"
-                      />
-                    ) : (
-                      <AiOutlineStar
-                        onClick={() => handleSaveExercise(index)}
-                        className="star-favorite"
-                      />
-                    )}
-
-                    <p className="name-item">{item[0]}</p>
-                    <p className="type-item">
-                      Tipo: <span>{item[1]}</span>
-                    </p>
-                    <p className="target-item">
-                      Grupo alvo: <span>{item[2]}</span>
-                    </p>
-                    <p className="equipment-item">
-                      Equipamento: <span>{item[3]}</span>
-                    </p>
-                    <input
-                      type="submit"
-                      value="ver mais"
-                      data-bs-toggle="modal"
-                      data-bs-target={`#modal-item${index}`}
-                    />
-
+                <div className="row results">
+                  {data.map((item, index) => (
                     <div
-                      className="modal fade"
-                      id={`modal-item${index}`}
-                      tabIndex="-1"
-                      aria-labelledby={`#modal-label-item${index}`}
-                      aria-hidden="true"
+                      key={index}
+                      id={`card-${index}`}
+                      className={`result-item my-2 col-6`}
                     >
-                      {/* Modal */}
-                      <div className="modal-dialog">
-                        <div className="modal-content">
-                          <div className="header-modal">
-                            <h5
-                              className="modal-title"
-                              id={`modal-label-item${index}`}
-                            >
-                              {item[0]}
-                            </h5>
-                          </div>
-                          <div className="body-modal">
-                            <img
-                              className="gif-exercise"
-                              src={item[4]}
-                              alt="gif-exercise"
-                            />
-                          </div>
-                          <div className="footer-modal">
-                            <button
-                              type="button"
-                              className="close-button"
-                              data-bs-dismiss="modal"
-                            >
-                              Fechar
-                            </button>
+                      {/* Ícones de Favoritos */}
+                      {favoriteExercise.some(
+                        (favorite) => favorite[0] === item[0]
+                      ) ? (
+                        <AiFillStar
+                          onClick={() => handleRemoveFavoriteExercise(index)}
+                          className="star-favorite"
+                        />
+                      ) : (
+                        <AiOutlineStar
+                          onClick={() => handleSaveExercise(index)}
+                          className="star-favorite"
+                        />
+                      )}
+
+                      <p className="name-item">{item[0]}</p>
+                      <p className="type-item">
+                        Tipo: <span>{item[1]}</span>
+                      </p>
+                      <p className="target-item">
+                        Grupo alvo: <span>{item[2]}</span>
+                      </p>
+                      <p className="equipment-item">
+                        Equipamento: <span>{item[3]}</span>
+                      </p>
+                      <input
+                        type="submit"
+                        value="ver mais"
+                        data-bs-toggle="modal"
+                        data-bs-target={`#modal-item${index}`}
+                      />
+
+                      <div
+                        className="modal fade"
+                        id={`modal-item${index}`}
+                        tabIndex="-1"
+                        aria-labelledby={`modal-label-item${index}`}
+                        aria-hidden="true"
+                      >
+                        {/* Modal */}
+                        <div className="modal-dialog">
+                          <div className="modal-content">
+                            <div className="header-modal">
+                              <h5
+                                className="modal-title"
+                                id={`modal-label-item${index}`}
+                              >
+                                {item[0]}
+                              </h5>
+                            </div>
+                            <div className="body-modal">
+                              <img
+                                className="gif-exercise"
+                                src={item[4]}
+                                alt="gif-exercise"
+                              />
+                            </div>
+                            <div className="footer-modal">
+                              <button
+                                type="button"
+                                className="close-button"
+                                data-bs-dismiss="modal"
+                              >
+                                Fechar
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-            </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
-        ) : (
-          ""
         )}
 
         {searchClicked && noResultsFound && data.length === 0 && (
