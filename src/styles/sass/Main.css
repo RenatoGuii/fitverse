@@ -391,6 +391,73 @@
   text-align: center;
 }
 
+.container.perfil {
+  padding-top: 68.9px;
+}
+.container.perfil .perfil-h1 {
+  border-bottom: 3px solid rgb(1, 1, 41);
+  color: rgb(1, 1, 41);
+  font-weight: 800;
+  margin-bottom: 20px;
+  padding: 20px 0;
+  text-align: center;
+}
+.container.perfil .user-info-box .username,
+.container.perfil .user-info-box .email {
+  font-weight: 700;
+}
+.container.perfil .user-info-box .username .value,
+.container.perfil .user-info-box .email .value {
+  font-weight: 400;
+}
+.container.perfil .options {
+  padding-top: 15px;
+}
+.container.perfil .options .options-title {
+  font-weight: 700;
+}
+.container.perfil .options .options-title .config-icon {
+  color: rgb(1, 1, 41);
+  font-size: 25px;
+  padding-bottom: 3px;
+}
+.container.perfil .options .changeUsername,
+.container.perfil .options .changePassword {
+  margin: 8px 0 0 0;
+}
+.container.perfil .options .changeUsername .value,
+.container.perfil .options .changePassword .value {
+  text-decoration: none;
+  color: #0D0D0D;
+  font-weight: 600;
+}
+.container.perfil .options .changeUsername .value:hover,
+.container.perfil .options .changePassword .value:hover {
+  border-bottom: 2px solid #0D0D0D;
+  opacity: 80%;
+}
+.container.perfil .logout {
+  background-color: rgb(1, 1, 41);
+  border: 1px solid transparent;
+  border-radius: 5px;
+  display: block;
+  color: #FBFBFD;
+  font-size: 12px;
+  padding: 8px 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.5s;
+  margin: 30px auto 0 auto;
+  text-decoration: none;
+  width: 61px;
+}
+.container.perfil .logout:hover {
+  background-color: #FBFBFD;
+  color: rgb(1, 1, 41);
+  border-color: rgb(1, 1, 41);
+  transition: 0.5s;
+}
+
 .container-navbar {
   background-color: #0D0D0D;
   border-bottom: 3px solid #FFB627;
@@ -642,7 +709,7 @@
 }
 
 body {
-  background-color: #FBFBFD;
+  background-color: rgb(241, 239, 239);
   margin-bottom: 200px !important;
   overflow-x: hidden;
 }

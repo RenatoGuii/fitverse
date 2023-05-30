@@ -6,6 +6,7 @@
 // Pages
 @import "../sass/pages/TrainingPlan.scss";
 @import "../sass/pages/Imc.scss";
+@import "../sass/pages/Perfil.scss";
 
 // Components
 @import "../sass/components/Navbar.scss";
@@ -25,7 +26,7 @@
 }
 
 body {
-    background-color: $White;
+    background-color: rgb(241, 239, 239);
     margin-bottom: 200px !important;
     overflow-x: hidden;
 }

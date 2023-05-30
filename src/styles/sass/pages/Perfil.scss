@@ -1,0 +1,60 @@
+.container.perfil {
+    padding-top: 68.9px;
+
+    .perfil-h1 {
+        border-bottom: 3px solid $Blue;
+        color: $Blue;
+        font-weight: 800;
+        margin-bottom: 20px;
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .user-info-box {
+        .username,
+        .email {
+            font-weight: 700;
+
+            .value {
+                font-weight: 400;
+            }
+        }
+
+    }
+
+    .options {
+        padding-top: 15px;
+        .options-title {
+            font-weight: 700;
+
+            .config-icon {
+                color: $Blue;
+                font-size: 25px;
+                padding-bottom: 3px;
+            }
+        }
+
+        .changeUsername,
+        .changePassword {
+            margin: 8px 0 0 0;
+
+            .value {
+                text-decoration: none;
+                color: $Black;
+                font-weight: 600;
+
+                &:hover {
+                    border-bottom: 2px solid $Black;
+                    opacity: 80%;
+                }
+            }
+        }
+    }
+
+    .logout {
+        @include secondaryButton(12px); 
+        margin: 30px auto 0 auto;
+        text-decoration: none;
+        width: 61px;
+    }
+}

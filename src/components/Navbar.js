@@ -42,7 +42,7 @@ const Navbar = () => {
     <div>
       <header className="container-navbar">
         <nav>
-          <Link to={"/"} className="navbar-logo">
+          <Link to={"/trainingPlan"} className="navbar-logo">
             FitVerse
           </Link>
           <div className="button-menu">
@@ -52,18 +52,18 @@ const Navbar = () => {
           </div>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link to={"/perfil"} className="nav-link active">
-                Perfil
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link to={"/trainingPlan"} className="nav-link active">
                 Exercícios
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"imc"} className="nav-link active">
+              <Link to={"/imc"} className="nav-link active">
                 IMC
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/perfil"} className="nav-link active">
+                Perfil
               </Link>
             </li>
           </ul>
