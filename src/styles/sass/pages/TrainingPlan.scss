@@ -1,231 +1,234 @@
-.container.trainingPlan {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding-top: 68.9px;
-   
-    .text-tp {
-        padding-top: 15%;
-        width: 50%;
-
-        h2 {
-            color: $Blue;
-            font-weight: 800;
-        }
-        p {
-            color: $Blue;
-            font-weight: 400;
-            margin: 0 auto 15px auto;
-        }
-    }
-
-    .images-desktop {
-        position: relative;
-        width: 50%;
-
-        .images-tp-desktop {
-            border-radius: 12px;
-            height: 220px;
-        }
-
-        #tp1 {
-            position: absolute;
-            right: 59%;
-            top: 10px;
-        }
-
-        #tp2 {
-            position: absolute;
-            right: 25%;   
-            top: 160px;
-        }
-
-        #tp3 {
-            position: absolute;
-            right: 25%;
-            top: -120px;
-        }
-    }
-
-    .images-mobile {
-        display: none;
-    }
-}
-
-
-.container.form {
-    margin-top: 230px;
-
-    h4 {
-        color: $Blue;
-        font-weight: 700;
-        margin-bottom: 25px;
-    }
-
-    .form-tp {
-
-        .input-form {
-            label {
+    .container.trainingPlan {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding-top: 68.9px;
+       
+        .text-tp {
+            padding-top: 15%;
+            width: 50%;
+    
+            h2 {
                 color: $Blue;
-                font-weight: 500;
-                margin-bottom: 5px;
+                font-weight: 800;
             }
-
-            .form-select {
-                margin-bottom: 20px;
-                
-                &:hover {
-                    cursor: pointer;
-                }
-                
-                &:focus {
-                    outline: 1px solid $Blue;
-                    box-shadow: none;
-                }
-
-                .selected-op {
-                    font-weight: bold
-                }
+            p {
+                color: $Blue;
+                font-weight: 400;
+                margin: 0 auto 15px auto;
             }
-
-            .form-select.error {
-                outline: 3px solid red
-            }
-
         }
-
-        .search-button {
-            @include primaryButton(13px);
+    
+        .images-desktop {
+            position: relative;
+            width: 50%;
+    
+            .images-tp-desktop {
+                border-radius: 12px;
+                height: 220px;
+            }
+    
+            #tp1 {
+                position: absolute;
+                right: 59%;
+                top: 10px;
+            }
+    
+            #tp2 {
+                position: absolute;
+                right: 25%;   
+                top: 160px;
+            }
+    
+            #tp3 {
+                position: absolute;
+                right: 25%;
+                top: -120px;
+            }
+        }
+    
+        .images-mobile {
+            display: none;
         }
     }
-
-    .loading-text {
-        color: $Black;
-        font-weight: 800;
-        padding-top: 45px;
-        text-align: center;
-    }
-
-    .results-form {
-        margin-top: 40px;
-        
-        .row>* {
-            padding: 0;
+    
+    
+    .container.form {
+        margin-top: 230px;
+    
+        h4 {
+            color: $Blue;
+            font-weight: 700;
+            margin-bottom: 25px;
         }
-
-        .row.results {
-            background-color: $White;
-            border: 3px solid $Blue;
-            margin: 0;
-            padding: 10px 20px;
-            
-            .result-item {
-                border: 2px solid $Blue;
-                margin: auto;
-                position: relative;
-                width: 230px;
-
     
-                .star-favorite {
-                    color: $Orange;
-                    cursor: pointer;
-                    font-size: 19px;
-                    position: absolute;
-                    right: 2%;
-                    top: 1%;
-                }
-
-                p {
-                    margin: 0;
-                    word-break: keep-all;
-                }
-                
-                .name-item {
-                    background-color: $Blue;
-                    border-bottom: 2px solid $Blue;
-                    color: $White;
-                    padding: 22px 5px;
-                    text-align: center;
-                    text-transform: uppercase;
-                    width: 100%;
+        .form-tp {
+    
+            .input-form {
+                label {
+                    color: $Blue;
+                    font-weight: 500;
+                    margin-bottom: 5px;
                 }
     
-                .type-item,
-                .target-item,
-                .equipment-item {
-                    font-weight: 700;
-                    padding: 8px 5px;
-                    text-transform: capitalize;
+                .form-select {
+                    margin-bottom: 20px;
+                    
+                    &:hover {
+                        cursor: pointer;
+                    }
+                    
+                    &:focus {
+                        outline: 1px solid $Blue;
+                        box-shadow: none;
+                    }
     
-                    span {
-                        font-weight: 400;
+                    .selected-op {
+                        font-weight: bold
                     }
                 }
-
-                .equipment-item {
-                    margin-bottom: 70px
+    
+                .form-select.error {
+                    outline: 3px solid red
                 }
     
-                input {
-                    @include secondaryButton(12px);
-                    position: absolute;
-                    bottom: -8px;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
-
-
-                .modal.fade.show {
-                    .modal-dialog {
-                        .modal-content {
-                            .header-modal {
-                                background-color: $Blue;
-                                position: relative;
-
-                                .modal-title {
-                                    color: $White;
-                                    padding: 10px 40px;
-                                    word-break: keep-all;
-                                    text-align: center;
-                                    text-transform: uppercase;
+            }
+    
+            .search-button {
+                @include primaryButton(13px);
+                margin-bottom: 30px;
+            }
+        }
+    
+        .loading-text {
+            color: $Black;
+            font-weight: 800;
+            padding-top: 45px;
+            text-align: center;
+        }
+    
+        .results-form {
+            margin-top: 40px;
+            
+            .row>* {
+                padding: 0;
+            }
+    
+            .row.results {
+                background-color: $White;
+                border: 3px solid $Blue;
+                margin: 0 0 20px 0;
+                padding: 10px 20px;
+                
+                .result-item {
+                    border: 2px solid $Blue;
+                    margin: auto;
+                    position: relative;
+                    width: 230px;
+    
+        
+                    .star-favorite {
+                        color: $Orange;
+                        cursor: pointer;
+                        font-size: 19px;
+                        position: absolute;
+                        right: 2%;
+                        top: 1%;
+                    }
+    
+                    p {
+                        margin: 0;
+                        word-break: keep-all;
+                    }
+                    
+                    .name-item {
+                        background-color: $Blue;
+                        border-bottom: 2px solid $Blue;
+                        color: $White;
+                        padding: 22px 5px;
+                        text-align: center;
+                        text-transform: uppercase;
+                        width: 100%;
+                    }
+        
+                    .type-item,
+                    .target-item,
+                    .equipment-item {
+                        font-weight: 700;
+                        padding: 8px 5px;
+                        text-transform: capitalize;
+        
+                        span {
+                            font-weight: 400;
+                        }
+                    }
+    
+                    .equipment-item {
+                        margin-bottom: 70px
+                    }
+        
+                    input {
+                        @include secondaryButton(12px);
+                        position: absolute;
+                        bottom: -8px;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+    
+    
+                    .modal.fade.show {
+                        .modal-dialog {
+                            .modal-content {
+                                .header-modal {
+                                    background-color: $Blue;
+                                    position: relative;
+    
+                                    .modal-title {
+                                        color: $White;
+                                        padding: 10px 40px;
+                                        word-break: keep-all;
+                                        text-align: center;
+                                        text-transform: uppercase;
+                                    }
+    
                                 }
-
-                            }
-
-                            .body-modal {
-                                box-sizing: border-box;
-                                border: 10px solid $Blue;
-
-                                img {
-                                    max-height: 400px;
-                                    width: 100%;
+    
+                                .body-modal {
+                                    box-sizing: border-box;
+                                    border: 10px solid $Blue;
+    
+                                    img {
+                                        max-height: 400px;
+                                        width: 100%;
+                                    }
                                 }
-                            }
-                            
-                            .footer-modal {
-                                align-items: center;
-                                background-color: $Blue;
-                                display: flex;
-                                justify-content: center;
-                                padding: 10px 0 15px 0;
-
-                                .close-button {
-                                    @include modalButton(13px, rgba(255, 0, 0, 0.625));
+                                
+                                .footer-modal {
+                                    align-items: center;
+                                    background-color: $Blue;
+                                    display: flex;
+                                    justify-content: center;
+                                    padding: 10px 0 15px 0;
+    
+                                    .close-button {
+                                        @include modalButton(13px, rgba(255, 0, 0, 0.625));
+                                    }
                                 }
+    
                             }
-
                         }
                     }
                 }
             }
+            
         }
-        
+    
+        .no-results-found {
+            color: $Blue;
+            margin-top: 40px;
+            text-align: center;
+        }
     }
 
-    .no-results-found {
-        color: $Blue;
-        margin-top: 40px;
-        text-align: center;
-    }
-}
+

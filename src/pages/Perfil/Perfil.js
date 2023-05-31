@@ -157,9 +157,9 @@ const Perfil = () => {
           </Link>
         </p>
       </div>
-      <Link className="logout" to={"/login"}>
+      <a className="logout" href={"/login"}>
         Sair
-      </Link>
+      </a>
     </div>
   );
 };

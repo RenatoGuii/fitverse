@@ -89,14 +89,15 @@
   background-color: #FFB627;
   border: none;
   border-radius: 10px;
-  color: #0D0D0D;
+  color: rgb(1, 1, 41);
   font-size: 13px;
   font-weight: 600;
   padding: 8px 15px;
   transition: 0.5s;
+  margin-bottom: 30px;
 }
 .container.form .form-tp .search-button:hover {
-  background-color: #0D0D0D;
+  background-color: rgb(1, 1, 41);
   color: #FFB627;
   transition: 0.5s;
 }
@@ -115,7 +116,7 @@
 .container.form .results-form .row.results {
   background-color: #FBFBFD;
   border: 3px solid rgb(1, 1, 41);
-  margin: 0;
+  margin: 0 0 20px 0;
   padding: 10px 20px;
 }
 .container.form .results-form .row.results .result-item {
@@ -389,7 +390,7 @@
   background-color: #FFB627;
   border: none;
   border-radius: 10px;
-  color: #0D0D0D;
+  color: rgb(1, 1, 41);
   font-size: 12px;
   font-weight: 600;
   padding: 8px 15px;
@@ -397,7 +398,7 @@
   margin-bottom: 15px;
 }
 .container.perfil .favoriteEx .favoriteEx-button-collapse:hover {
-  background-color: #0D0D0D;
+  background-color: rgb(1, 1, 41);
   color: #FFB627;
   transition: 0.5s;
 }
@@ -553,6 +554,152 @@
   background-color: #FBFBFD;
   color: rgb(1, 1, 41);
   border-color: rgb(1, 1, 41);
+  transition: 0.5s;
+}
+
+.login-form-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.login-form-page h1 {
+  color: rgb(1, 1, 41);
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.login-form-page h1 span {
+  color: #FFB627;
+  border-bottom: 2px solid rgb(1, 1, 41);
+  letter-spacing: 5px;
+}
+.login-form-page form {
+  align-items: center;
+  background-color: rgb(1, 1, 41);
+  border: 3px solid #FFB627;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+.login-form-page form .mb-4 {
+  margin-bottom: 1rem;
+}
+.login-form-page form .form-label {
+  color: #FBFBFD;
+  display: block;
+  font-weight: 100;
+  letter-spacing: 2px;
+  padding-left: 2px;
+  text-align: left;
+}
+.login-form-page form .form-control-input {
+  border: 2px solid #FFB627;
+  display: block;
+  max-width: 300px;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #f1efef;
+}
+.login-form-page form .form-control-input:focus {
+  outline: none;
+}
+.login-form-page form .links {
+  text-decoration: none;
+  font-size: 13px;
+  padding-left: 5px;
+}
+.login-form-page form button {
+  background-color: #FFB627;
+  border: none;
+  border-radius: 10px;
+  color: rgb(1, 1, 41);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 15px;
+  transition: 0.5s;
+}
+.login-form-page form button:hover {
+  background-color: rgb(1, 1, 41);
+  color: #FFB627;
+  transition: 0.5s;
+}
+
+.register-form-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.register-form-page h1 {
+  color: rgb(1, 1, 41);
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.register-form-page h1 span {
+  color: #FFB627;
+  border-bottom: 2px solid rgb(1, 1, 41);
+  letter-spacing: 5px;
+}
+.register-form-page form {
+  align-items: center;
+  background-color: rgb(1, 1, 41);
+  border: 3px solid #FFB627;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+.register-form-page form .mb-4 {
+  margin-bottom: 1rem;
+}
+.register-form-page form .form-label {
+  color: #FBFBFD;
+  display: block;
+  font-weight: 100;
+  letter-spacing: 2px;
+  padding-left: 2px;
+  text-align: left;
+}
+.register-form-page form .form-control-input {
+  border: 2px solid #FFB627;
+  display: block;
+  max-width: 300px;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #f1efef;
+}
+.register-form-page form .form-control-input:focus {
+  outline: none;
+}
+.register-form-page form .links {
+  text-decoration: none;
+  font-size: 13px;
+  padding-left: 5px;
+}
+.register-form-page form button {
+  background-color: #FFB627;
+  border: none;
+  border-radius: 10px;
+  color: rgb(1, 1, 41);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 15px;
+  transition: 0.5s;
+}
+.register-form-page form button:hover {
+  background-color: rgb(1, 1, 41);
+  color: #FFB627;
   transition: 0.5s;
 }
 
@@ -807,8 +954,6 @@
 }
 
 body {
-  background-color: rgb(241, 239, 239);
-  margin-bottom: 200px !important;
   overflow-x: hidden;
 }
 

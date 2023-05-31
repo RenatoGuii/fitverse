@@ -7,6 +7,8 @@
 @import "../sass/pages/TrainingPlan.scss";
 @import "../sass/pages/Imc.scss";
 @import "../sass/pages/Perfil.scss";
+@import "../sass/pages/Login.scss";
+@import "../sass/pages/Register.scss";
 
 // Components
 @import "../sass/components/Navbar.scss";
@@ -26,7 +28,5 @@
 }
 
 body {
-    background-color: rgb(241, 239, 239);
-    margin-bottom: 200px !important;
     overflow-x: hidden;
 }
