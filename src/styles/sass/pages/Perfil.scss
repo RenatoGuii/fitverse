@@ -11,6 +11,16 @@
     }
 
     .user-info-box {
+        .person-title {
+            font-weight: 700;
+
+            .person-icon {
+                color: $Blue;
+                font-size: 25px;
+                padding-bottom: 5px;
+            }
+        }
+
         .username,
         .email {
             font-weight: 700;
@@ -22,9 +32,136 @@
 
     }
 
-    .options {
+    .favoriteEx {
+        .favoriteEx-title {
+            font-weight: 700;
+            .favoriteEx-icon {
+                color: $Blue;
+                font-size: 25px;
+                padding-bottom: 5px;
+            }
+        }
+
+        .favoriteEx-button-collapse {
+            @include primaryButton(12px);
+            margin-bottom: 15px;
+        }
+
+        .row>* {
+            padding: 0;
+        }
+
+        .row.results {
+            background-color: $White;
+            border: 3px solid $Blue;
+            margin: 0;
+            padding: 10px 20px;
+            
+            .result-item {
+                border: 2px solid $Blue;
+                margin: auto;
+                position: relative;
+                width: 230px;
+
+    
+                .star-favorite {
+                    color: $Orange;
+                    cursor: pointer;
+                    font-size: 19px;
+                    position: absolute;
+                    right: 2%;
+                    top: 1%;
+                }
+
+                p {
+                    margin: 0;
+                    word-break: keep-all;
+                }
+                
+                .name-item {
+                    background-color: $Blue;
+                    border-bottom: 2px solid $Blue;
+                    color: $White;
+                    padding: 22px 5px;
+                    text-align: center;
+                    text-transform: uppercase;
+                    width: 100%;
+                }
+    
+                .type-item,
+                .target-item,
+                .equipment-item {
+                    font-weight: 700;
+                    padding: 8px 5px;
+                    text-transform: capitalize;
+    
+                    span {
+                        font-weight: 400;
+                    }
+                }
+
+                .equipment-item {
+                    margin-bottom: 70px
+                }
+    
+                input {
+                    @include secondaryButton(12px);
+                    position: absolute;
+                    bottom: -8px;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+
+                .modal.fade.show {
+                    .modal-dialog {
+                        .modal-content {
+                            .header-modal {
+                                background-color: $Blue;
+                                position: relative;
+
+                                .modal-title {
+                                    color: $White;
+                                    padding: 10px 40px;
+                                    word-break: keep-all;
+                                    text-align: center;
+                                    text-transform: uppercase;
+                                }
+
+                            }
+
+                            .body-modal {
+                                box-sizing: border-box;
+                                border: 10px solid $Blue;
+
+                                img {
+                                    max-height: 400px;
+                                    width: 100%;
+                                }
+                            }
+                            
+                            .footer-modal {
+                                align-items: center;
+                                background-color: $Blue;
+                                display: flex;
+                                justify-content: center;
+                                padding: 10px 0 15px 0;
+
+                                .close-button {
+                                    @include modalButton(13px, rgba(255, 0, 0, 0.625));
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .config {
         padding-top: 15px;
-        .options-title {
+        .config-title {
             font-weight: 700;
 
             .config-icon {
@@ -58,3 +195,10 @@
         width: 61px;
     }
 }
+
+
+
+
+
+
+    

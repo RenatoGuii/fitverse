@@ -118,47 +118,6 @@
   margin: 0;
   padding: 10px 20px;
 }
-.container.form .results-form .row.results .action-buttons {
-  display: flex;
-  justify-content: center;
-}
-.container.form .results-form .row.results .action-buttons .edit-button, .container.form .results-form .row.results .action-buttons .reset-button {
-  background-color: rgb(1, 1, 41);
-  border: none;
-  border-radius: 5px;
-  color: #FBFBFD;
-  font-size: 12px;
-  padding: 5px 5px;
-}
-.container.form .results-form .row.results .action-buttons .reset-button {
-  background-color: rgb(138, 4, 4);
-}
-.container.form .results-form .row.results .action-buttons .save-button, .container.form .results-form .row.results .action-buttons .save-button-active {
-  background-color: green;
-  border: none;
-  border-radius: 5px;
-  color: #FBFBFD;
-  font-size: 12px;
-  padding: 5px 5px;
-  margin-right: 10px;
-  display: none;
-}
-.container.form .results-form .row.results .action-buttons .save-button-active {
-  display: block;
-}
-.container.form .results-form .row.results .save-plan-div {
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-}
-.container.form .results-form .row.results .save-plan-div .save-plan-button {
-  background-color: green;
-  border: none;
-  border-radius: 5px;
-  color: #FBFBFD;
-  font-size: 11px;
-  padding: 5px 5px;
-}
 .container.form .results-form .row.results .result-item {
   border: 2px solid rgb(1, 1, 41);
   margin: auto;
@@ -402,6 +361,14 @@
   padding: 20px 0;
   text-align: center;
 }
+.container.perfil .user-info-box .person-title {
+  font-weight: 700;
+}
+.container.perfil .user-info-box .person-title .person-icon {
+  color: rgb(1, 1, 41);
+  font-size: 25px;
+  padding-bottom: 5px;
+}
 .container.perfil .user-info-box .username,
 .container.perfil .user-info-box .email {
   font-weight: 700;
@@ -410,29 +377,160 @@
 .container.perfil .user-info-box .email .value {
   font-weight: 400;
 }
-.container.perfil .options {
-  padding-top: 15px;
-}
-.container.perfil .options .options-title {
+.container.perfil .favoriteEx .favoriteEx-title {
   font-weight: 700;
 }
-.container.perfil .options .options-title .config-icon {
+.container.perfil .favoriteEx .favoriteEx-title .favoriteEx-icon {
+  color: rgb(1, 1, 41);
+  font-size: 25px;
+  padding-bottom: 5px;
+}
+.container.perfil .favoriteEx .favoriteEx-button-collapse {
+  background-color: #FFB627;
+  border: none;
+  border-radius: 10px;
+  color: #0D0D0D;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 15px;
+  transition: 0.5s;
+  margin-bottom: 15px;
+}
+.container.perfil .favoriteEx .favoriteEx-button-collapse:hover {
+  background-color: #0D0D0D;
+  color: #FFB627;
+  transition: 0.5s;
+}
+.container.perfil .favoriteEx .row > * {
+  padding: 0;
+}
+.container.perfil .favoriteEx .row.results {
+  background-color: #FBFBFD;
+  border: 3px solid rgb(1, 1, 41);
+  margin: 0;
+  padding: 10px 20px;
+}
+.container.perfil .favoriteEx .row.results .result-item {
+  border: 2px solid rgb(1, 1, 41);
+  margin: auto;
+  position: relative;
+  width: 230px;
+}
+.container.perfil .favoriteEx .row.results .result-item .star-favorite {
+  color: #FFB627;
+  cursor: pointer;
+  font-size: 19px;
+  position: absolute;
+  right: 2%;
+  top: 1%;
+}
+.container.perfil .favoriteEx .row.results .result-item p {
+  margin: 0;
+  word-break: keep-all;
+}
+.container.perfil .favoriteEx .row.results .result-item .name-item {
+  background-color: rgb(1, 1, 41);
+  border-bottom: 2px solid rgb(1, 1, 41);
+  color: #FBFBFD;
+  padding: 22px 5px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+}
+.container.perfil .favoriteEx .row.results .result-item .type-item,
+.container.perfil .favoriteEx .row.results .result-item .target-item,
+.container.perfil .favoriteEx .row.results .result-item .equipment-item {
+  font-weight: 700;
+  padding: 8px 5px;
+  text-transform: capitalize;
+}
+.container.perfil .favoriteEx .row.results .result-item .type-item span,
+.container.perfil .favoriteEx .row.results .result-item .target-item span,
+.container.perfil .favoriteEx .row.results .result-item .equipment-item span {
+  font-weight: 400;
+}
+.container.perfil .favoriteEx .row.results .result-item .equipment-item {
+  margin-bottom: 70px;
+}
+.container.perfil .favoriteEx .row.results .result-item input {
+  background-color: rgb(1, 1, 41);
+  border: 1px solid transparent;
+  border-radius: 5px;
+  display: block;
+  color: #FBFBFD;
+  font-size: 12px;
+  padding: 8px 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.5s;
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.container.perfil .favoriteEx .row.results .result-item input:hover {
+  background-color: #FBFBFD;
+  color: rgb(1, 1, 41);
+  border-color: rgb(1, 1, 41);
+  transition: 0.5s;
+}
+.container.perfil .favoriteEx .row.results .result-item .modal.fade.show .modal-dialog .modal-content .header-modal {
+  background-color: rgb(1, 1, 41);
+  position: relative;
+}
+.container.perfil .favoriteEx .row.results .result-item .modal.fade.show .modal-dialog .modal-content .header-modal .modal-title {
+  color: #FBFBFD;
+  padding: 10px 40px;
+  word-break: keep-all;
+  text-align: center;
+  text-transform: uppercase;
+}
+.container.perfil .favoriteEx .row.results .result-item .modal.fade.show .modal-dialog .modal-content .body-modal {
+  box-sizing: border-box;
+  border: 10px solid rgb(1, 1, 41);
+}
+.container.perfil .favoriteEx .row.results .result-item .modal.fade.show .modal-dialog .modal-content .body-modal img {
+  max-height: 400px;
+  width: 100%;
+}
+.container.perfil .favoriteEx .row.results .result-item .modal.fade.show .modal-dialog .modal-content .footer-modal {
+  align-items: center;
+  background-color: rgb(1, 1, 41);
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 15px 0;
+}
+.container.perfil .favoriteEx .row.results .result-item .modal.fade.show .modal-dialog .modal-content .footer-modal .close-button {
+  background-color: rgba(255, 0, 0, 0.625);
+  border: none;
+  border-radius: 5px;
+  color: #FBFBFD;
+  font-size: 13px;
+  padding: 5px 5px;
+}
+.container.perfil .config {
+  padding-top: 15px;
+}
+.container.perfil .config .config-title {
+  font-weight: 700;
+}
+.container.perfil .config .config-title .config-icon {
   color: rgb(1, 1, 41);
   font-size: 25px;
   padding-bottom: 3px;
 }
-.container.perfil .options .changeUsername,
-.container.perfil .options .changePassword {
+.container.perfil .config .changeUsername,
+.container.perfil .config .changePassword {
   margin: 8px 0 0 0;
 }
-.container.perfil .options .changeUsername .value,
-.container.perfil .options .changePassword .value {
+.container.perfil .config .changeUsername .value,
+.container.perfil .config .changePassword .value {
   text-decoration: none;
   color: #0D0D0D;
   font-weight: 600;
 }
-.container.perfil .options .changeUsername .value:hover,
-.container.perfil .options .changePassword .value:hover {
+.container.perfil .config .changeUsername .value:hover,
+.container.perfil .config .changePassword .value:hover {
   border-bottom: 2px solid #0D0D0D;
   opacity: 80%;
 }

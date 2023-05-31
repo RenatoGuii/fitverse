@@ -119,42 +119,6 @@
             border: 3px solid $Blue;
             margin: 0;
             padding: 10px 20px;
-
-            .action-buttons {
-                display: flex;
-                justify-content: center;
-
-                .edit-button {
-                    @include modalButton (12px, $Blue);
-                }
-
-                .reset-button {
-                    @extend .edit-button;
-                    background-color: rgb(138, 4, 4)
-                }
-                
-                .save-button {
-                    @include modalButton (12px, green);
-                    margin-right: 10px;
-                    display: none
-                }
-
-                .save-button-active {
-                    @extend .save-button;
-                    display: block
-                }
-            }
-            
-            .save-plan-div {
-                display: flex;
-                justify-content: center;
-                margin-top: 15px;
-
-                .save-plan-button {
-                    @include modalButton (11px, green);
-                }
-            }
-
             
             .result-item {
                 border: 2px solid $Blue;
