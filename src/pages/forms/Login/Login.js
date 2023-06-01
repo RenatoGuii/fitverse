@@ -20,7 +20,7 @@ const Login = () => {
 
     if (emptyFieldsArr.length > 0) {
       setEmptyFields(emptyFieldsArr);
-      alert("Preencha os campos todos os campos!");
+      alert("Preencha todos os campos!");
     } else {
       console.log(email);
       console.log(password);

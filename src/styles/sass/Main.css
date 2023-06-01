@@ -593,7 +593,7 @@
   color: #FBFBFD;
   display: block;
   font-weight: 100;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   padding-left: 2px;
   text-align: left;
 }
@@ -666,7 +666,7 @@
   color: #FBFBFD;
   display: block;
   font-weight: 100;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   padding-left: 2px;
   text-align: left;
 }
@@ -698,6 +698,166 @@
   transition: 0.5s;
 }
 .register-form-page form button:hover {
+  background-color: rgb(1, 1, 41);
+  color: #FFB627;
+  transition: 0.5s;
+}
+
+.changeUsername-form-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.changeUsername-form-page .leave-icon {
+  color: rgb(1, 1, 41);
+  font-size: 45px;
+  left: 2vw;
+  position: absolute;
+  top: 2vh;
+}
+.changeUsername-form-page h1 {
+  color: rgb(1, 1, 41);
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.changeUsername-form-page h1 span {
+  color: #FFB627;
+  border-bottom: 2px solid rgb(1, 1, 41);
+  letter-spacing: 5px;
+}
+.changeUsername-form-page form {
+  align-items: center;
+  background-color: rgb(1, 1, 41);
+  border: 3px solid #FFB627;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+.changeUsername-form-page form .mb-4 {
+  margin-bottom: 1rem;
+}
+.changeUsername-form-page form .form-label {
+  color: #FBFBFD;
+  display: block;
+  font-weight: 100;
+  letter-spacing: 1px;
+  padding-left: 2px;
+  text-align: left;
+}
+.changeUsername-form-page form .form-control-input {
+  border: 2px solid #FFB627;
+  display: block;
+  max-width: 300px;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #f1efef;
+}
+.changeUsername-form-page form .form-control-input:focus {
+  outline: none;
+}
+.changeUsername-form-page form .links {
+  text-decoration: none;
+  font-size: 13px;
+  padding-left: 5px;
+}
+.changeUsername-form-page form button {
+  background-color: #FFB627;
+  border: none;
+  border-radius: 10px;
+  color: rgb(1, 1, 41);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 15px;
+  transition: 0.5s;
+}
+.changeUsername-form-page form button:hover {
+  background-color: rgb(1, 1, 41);
+  color: #FFB627;
+  transition: 0.5s;
+}
+
+.changePassword-form-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.changePassword-form-page .leave-icon {
+  color: rgb(1, 1, 41);
+  font-size: 45px;
+  left: 2vw;
+  position: absolute;
+  top: 2vh;
+}
+.changePassword-form-page h1 {
+  color: rgb(1, 1, 41);
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.changePassword-form-page h1 span {
+  color: #FFB627;
+  border-bottom: 2px solid rgb(1, 1, 41);
+  letter-spacing: 5px;
+}
+.changePassword-form-page form {
+  align-items: center;
+  background-color: rgb(1, 1, 41);
+  border: 3px solid #FFB627;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+.changePassword-form-page form .mb-4 {
+  margin-bottom: 1rem;
+}
+.changePassword-form-page form .form-label {
+  color: #FBFBFD;
+  display: block;
+  font-weight: 100;
+  letter-spacing: 1px;
+  padding-left: 2px;
+  text-align: left;
+}
+.changePassword-form-page form .form-control-input {
+  border: 2px solid #FFB627;
+  display: block;
+  max-width: 300px;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #f1efef;
+}
+.changePassword-form-page form .form-control-input:focus {
+  outline: none;
+}
+.changePassword-form-page form .links {
+  text-decoration: none;
+  font-size: 13px;
+  padding-left: 5px;
+}
+.changePassword-form-page form button {
+  background-color: #FFB627;
+  border: none;
+  border-radius: 10px;
+  color: rgb(1, 1, 41);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 15px;
+  transition: 0.5s;
+}
+.changePassword-form-page form button:hover {
   background-color: rgb(1, 1, 41);
   color: #FFB627;
   transition: 0.5s;

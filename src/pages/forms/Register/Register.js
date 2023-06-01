@@ -32,7 +32,7 @@ const Register = () => {
 
     if (emptyFieldsArr.length > 0) {
       setEmptyFields(emptyFieldsArr);
-      alert("Preencha os campos todos os campos!");
+      alert("Preencha todos os campos!");
     } else if (password.length < 6) {
       alert("A senha deve ter pelo menos 6 digitos!");
     } else if (password !== confirmPassword) {
@@ -92,7 +92,7 @@ const Register = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="email" className="form-label">
+          <label htmlFor="password" className="form-label">
             Senha
           </label>
           <input
@@ -107,13 +107,13 @@ const Register = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="password" className="form-label">
+          <label htmlFor="confirmPassword" className="form-label">
             Confirmar senha
           </label>
           <input
             type="password"
-            name="confirmarSenha"
-            id="confirmarSenha"
+            name="confirmPassword"
+            id="confirmPassword"
             className="form-control-input"
             placeholder="Confirme sua senha"
             onChange={(e) => setConfirmPassword(e.target.value)}
