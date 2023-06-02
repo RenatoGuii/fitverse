@@ -614,6 +614,9 @@
   font-size: 13px;
   padding-left: 5px;
 }
+.login-form-page form .error-message {
+  color: red;
+}
 .login-form-page form button {
   background-color: #FFB627;
   border: none;

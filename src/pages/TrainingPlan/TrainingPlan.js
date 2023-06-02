@@ -1,4 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+
+// Context
+
+import UserContext from "../../Contexts/AuthContext";
 
 // APIs
 import getData from "../../APIs/useApiExercise";
@@ -15,6 +19,9 @@ import { AiFillStar } from "react-icons/ai";
 import { AiOutlineStar } from "react-icons/ai";
 
 const TrainingPlan = () => {
+  const { user } = useContext(UserContext);
+  console.log(user);
+
   // variables
   const [type, setType] = useState("");
   const [data, setData] = useState(null);
@@ -141,8 +148,6 @@ const TrainingPlan = () => {
   useEffect(() => {
     // Mandar para o BD
     const favoriteExerciseJson = JSON.stringify(favoriteExercise);
-    console.log(favoriteExercise);
-    console.log(favoriteExerciseJson);
   }, [favoriteExercise]);
 
   return (

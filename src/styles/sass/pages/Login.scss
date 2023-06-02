@@ -36,8 +36,12 @@
         padding-left: 5px;
       }
   
+      .error-message {
+        color: red;
+      }
+
       button {
-        @include primaryButton(12px)
+        @include primaryButton(12px);
       }
     }
   }

@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import receiveUser from "../../../APIs/useApiReceiveUser";
+import UserContext from "../../../Contexts/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emptyFields, setEmptyFields] = useState([]);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const { user, login, logout } = useContext(UserContext);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const emptyFieldsArr = [];
@@ -22,18 +31,41 @@ const Login = () => {
       setEmptyFields(emptyFieldsArr);
       alert("Preencha todos os campos!");
     } else {
-      console.log(email);
-      console.log(password);
+      setIsLoading(true);
+
+      try {
+        const user = await receiveUser(email, password, login);
+
+        if (user) {
+          login(JSON.stringify(user));
+          navigate("/trainingPlan");
+          setIsLoading(false);
+        } else {
+          setError("email ou senha incorretos");
+          setIsLoading(false);
+        }
+      } catch (error) {
+        setError("Erro ao fazer login");
+        setIsLoading(false);
+      }
 
       setEmail("");
       setPassword("");
     }
   };
 
+  useEffect(() => {
+    logout();
+  }, []);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <div className="login-form-page">
       <h1>
-        Bem vindo de volta <br /> ao <span>FitVerse</span> !
+        Bem-vindo de volta <br /> ao <span>FitVerse</span>!
       </h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -71,8 +103,10 @@ const Login = () => {
           </a>
         </div>
 
-        <button className="btn btn-primary" type="submit">
-          Logar
+        {error && <p className="error-message">{error}</p>}
+
+        <button className="btn btn-primary" type="submit" disabled={isLoading}>
+          {isLoading ? "Carregando..." : "Logar"}
         </button>
       </form>
     </div>

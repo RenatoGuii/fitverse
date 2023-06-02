@@ -1,6 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
+
+// Context
+import UserContext from "../../../Contexts/AuthContext";
+import changeName from "../../../APIs/useApiChangeUsername";
+import receiveUser from "../../../APIs/useApiReceiveUser";
 
 // Icons
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
@@ -9,6 +14,7 @@ const ChangeUsername = () => {
   const user = {
     nome: "teste",
     senha: "teste",
+    id: 1,
   }; // Resgatar usuário
 
   const [userData, setUserData] = useState(user);
@@ -16,6 +22,8 @@ const ChangeUsername = () => {
   const [password, setPassword] = useState("");
 
   const [emptyFields, setEmptyFields] = useState([]);
+
+  const { updateUsername, login } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,7 +44,16 @@ const ChangeUsername = () => {
     } else if (password !== userData.senha) {
       alert("Senha incorreta!");
     } else {
-      changeName(newUsername);
+      const userAtt = {
+        nome: newUsername,
+        id: userData.id,
+        senha: password,
+      };
+
+      const userAttJson = JSON.stringify(userAtt);
+
+      login(userAttJson);
+
       alert("Nome de usuário trocado com sucesso :)");
 
       setNewUsername("");
@@ -44,12 +61,12 @@ const ChangeUsername = () => {
     }
   };
 
-  const changeName = (newUsername) => {
-    const updateUserData = { ...userData, nome: newUsername };
+  // const changeName = (newUsername) => {
+  //   const updateUserData = { ...userData, nome: newUsername };
 
-    // Envés de atualizar o state, mandar o update para o BD
-    setUserData(updateUserData);
-  };
+  //   // Envés de atualizar o state, mandar o update para o BD
+  //   setUserData(updateUserData);
+  // };
 
   useEffect(() => {
     console.log(userData);

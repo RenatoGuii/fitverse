@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 // React Router
 import { Link } from "react-router-dom";
+
+// Context
+import UserContext from "../../Contexts/AuthContext";
 
 // Icon
 import { BsFillGearFill } from "react-icons/bs";
@@ -14,6 +17,8 @@ const Perfil = () => {
   const [data, setData] = useState([]);
 
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const { logout } = useContext(UserContext);
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
@@ -157,7 +162,7 @@ const Perfil = () => {
           </Link>
         </p>
       </div>
-      <a className="logout" href={"/login"}>
+      <a className="logout" href={"/login"} onClick={() => logout()}>
         Sair
       </a>
     </div>

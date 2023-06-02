@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+
+// API
+import UserContext from "../../../Contexts/AuthContext";
+import createUser from "../../../APIs/useCreateUser";
 
 const Register = () => {
   const [user, setUser] = useState({});
@@ -7,9 +11,11 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const { register } = useContext(UserContext);
+
   const [emptyFields, setEmptyFields] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const emptyFieldsArr = [];
@@ -38,11 +44,16 @@ const Register = () => {
     } else if (password !== confirmPassword) {
       alert("As duas senhas estão diferentes, corrija-as!");
     } else {
-      setUser({
-        username: username,
+      const userObj = {
+        nome: username,
         email: email,
-        password: password,
-      });
+        senha: password,
+      };
+      const userJson = JSON.stringify(userObj);
+
+      setUser(userObj);
+
+      register(userJson);
 
       setUsername("");
       setEmail("");
@@ -50,12 +61,6 @@ const Register = () => {
       setConfirmPassword("");
     }
   };
-
-  useEffect(() => {
-    const userJson = JSON.stringify(user);
-    console.log(user);
-    console.log(userJson);
-  }, [user]);
 
   return (
     <div className="register-form-page">
