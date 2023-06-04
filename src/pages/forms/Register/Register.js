@@ -2,20 +2,25 @@ import React, { useContext, useEffect, useState } from "react";
 
 // API
 import UserContext from "../../../Contexts/AuthContext";
-import createUser from "../../../APIs/useCreateUser";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [user, setUser] = useState({});
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const { register } = useContext(UserContext);
-
+  const [error, setError] = useState("");
   const [emptyFields, setEmptyFields] = useState([]);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { isAuthenticated, register, login, isDuplicateEmail } =
+    useContext(UserContext);
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
+    setError("");
+
     e.preventDefault();
 
     const emptyFieldsArr = [];
@@ -40,27 +45,47 @@ const Register = () => {
       setEmptyFields(emptyFieldsArr);
       alert("Preencha todos os campos!");
     } else if (password.length < 6) {
-      alert("A senha deve ter pelo menos 6 digitos!");
+      setError("A senha deve ter pelo menos 6 digitos!");
     } else if (password !== confirmPassword) {
-      alert("As duas senhas estão diferentes, corrija-as!");
+      setError("As duas senhas estão diferentes, corrija-as!");
     } else {
-      const userObj = {
-        nome: username,
-        email: email,
-        senha: password,
-      };
-      const userJson = JSON.stringify(userObj);
+      setIsLoading(true);
 
-      setUser(userObj);
+      try {
+        const checkEmail = await isDuplicateEmail(email);
 
-      register(userJson);
+        if (checkEmail) {
+          setError("Esse e-mail já está sendo utilizado");
+          setIsLoading(false);
+        } else {
+          const userObj = {
+            nome: username,
+            email: email,
+            senha: password,
+          };
+
+          register(userObj, login);
+        }
+      } catch (error) {
+        setError("Erro ao fazer registro");
+        setIsLoading(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate("/trainingPlan");
+      setIsLoading(false);
 
       setUsername("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+    } else {
+      setIsLoading(false);
     }
-  };
+  }, [isAuthenticated()]);
 
   return (
     <div className="register-form-page">
@@ -80,6 +105,7 @@ const Register = () => {
             placeholder="Insira seu nome"
             onChange={(e) => setUsername(e.target.value)}
             value={username}
+            disabled={isLoading}
           />
         </div>
         <div className="mb-4">
@@ -94,6 +120,7 @@ const Register = () => {
             placeholder="Insira seu e-mail"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            disabled={isLoading}
           />
         </div>
         <div className="mb-4">
@@ -108,6 +135,7 @@ const Register = () => {
             placeholder="Digite sua senha"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            disabled={isLoading}
           />
         </div>
 
@@ -123,15 +151,22 @@ const Register = () => {
             placeholder="Confirme sua senha"
             onChange={(e) => setConfirmPassword(e.target.value)}
             value={confirmPassword}
+            disabled={isLoading}
           />
 
-          <a href={"/login"} className="links">
+          <a
+            href={"/login"}
+            className="links"
+            style={{ display: isLoading ? "none" : "" }}
+          >
             Já tem uma conta?
           </a>
         </div>
 
-        <button className="btn btn-primary" type="submit">
-          Registrar
+        {error && <p className="error-message">{error}</p>}
+
+        <button className="btn btn-primary" type="submit" disabled={isLoading}>
+          {isLoading ? "Carregando..." : "Registrar"}
         </button>
       </form>
     </div>

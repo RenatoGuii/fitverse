@@ -12,9 +12,12 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
-  const { user, login, logout } = useContext(UserContext);
+
+  const { login, logout } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
+    setError("");
+
     e.preventDefault();
 
     const emptyFieldsArr = [];
@@ -48,19 +51,12 @@ const Login = () => {
         setError("Erro ao fazer login");
         setIsLoading(false);
       }
-
-      setEmail("");
-      setPassword("");
     }
   };
 
   useEffect(() => {
     logout();
   }, []);
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   return (
     <div className="login-form-page">
@@ -81,6 +77,7 @@ const Login = () => {
             placeholder="Insira seu e-mail"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            disabled={isLoading}
           />
         </div>
 
@@ -96,9 +93,14 @@ const Login = () => {
             placeholder="Digite sua senha"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            disabled={isLoading}
           />
 
-          <a href={"/register"} className="links">
+          <a
+            href={"/register"}
+            className="links"
+            style={{ display: isLoading ? "none" : "" }}
+          >
             Não tem uma conta?
           </a>
         </div>

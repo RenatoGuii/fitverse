@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+
+import UserContext from "../../Contexts/AuthContext";
 
 // API
 import getData from "../../APIs/useApiImc";
 import getDataTranslate from "../../APIs/useApiTranslate";
 
 const Imc = () => {
+  const { user } = useContext(UserContext);
+
   // variables
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
@@ -37,7 +41,9 @@ const Imc = () => {
 
       getData(height, weight)
         .then(async (response) => {
-          const translatedClassification = dataTranslation(response.info.health);
+          const translatedClassification = dataTranslation(
+            response.info.health
+          );
           setData({
             imc: response.info.bmi,
             classification: await translatedClassification,
@@ -68,8 +74,8 @@ const Imc = () => {
   };
 
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    console.log(user);
+  }, [user]);
 
   return (
     <div className="container imc">

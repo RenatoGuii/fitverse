@@ -18,11 +18,15 @@ const Perfil = () => {
 
   const [isCollapsed, setIsCollapsed] = useState(false);
 
-  const { logout } = useContext(UserContext);
+  const { logout, user } = useContext(UserContext);
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   useEffect(() => {
     setData([
@@ -52,10 +56,10 @@ const Perfil = () => {
           <BsPerson className="person-icon" /> Informações
         </h4>
         <p className="username">
-          Nome de Usuário: <span className="value">{username}</span>
+          Nome de Usuário: <span className="value">{user.nome}</span>
         </p>
         <p className="email">
-          Email: <span className="value">{email}</span>
+          Email: <span className="value">{user.email}</span>
         </p>
       </div>
 

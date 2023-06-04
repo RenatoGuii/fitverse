@@ -20,7 +20,6 @@ import { AiOutlineStar } from "react-icons/ai";
 
 const TrainingPlan = () => {
   const { user } = useContext(UserContext);
-  console.log(user);
 
   // variables
   const [type, setType] = useState("");

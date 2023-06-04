@@ -1,31 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Context
 import UserContext from "../../../Contexts/AuthContext";
-import changeName from "../../../APIs/useApiChangeUsername";
-import receiveUser from "../../../APIs/useApiReceiveUser";
 
 // Icons
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 
 const ChangeUsername = () => {
-  const user = {
-    nome: "teste",
-    senha: "teste",
-    id: 1,
-  }; // Resgatar usuário
-
-  const [userData, setUserData] = useState(user);
   const [newUsername, setNewUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const [emptyFields, setEmptyFields] = useState([]);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { updateUsername, login } = useContext(UserContext);
+  const { user, updateUsername } = useContext(UserContext);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    setError("");
     e.preventDefault();
 
     const emptyFieldsArr = [];
@@ -41,41 +36,42 @@ const ChangeUsername = () => {
     if (emptyFieldsArr.length > 0) {
       setEmptyFields(emptyFieldsArr);
       alert("Preencha todos os campos!");
-    } else if (password !== userData.senha) {
-      alert("Senha incorreta!");
+    } else if (password !== user.senha) {
+      setError("Senha incorreta");
+    } else if (newUsername === user.nome) {
+      setError("O novo nome deve ser diferente do nome atual");
     } else {
-      const userAtt = {
+      setIsLoading(true);
+
+      const dataName = {
         nome: newUsername,
-        id: userData.id,
-        senha: password,
       };
 
-      const userAttJson = JSON.stringify(userAtt);
-
-      login(userAttJson);
-
-      alert("Nome de usuário trocado com sucesso :)");
-
-      setNewUsername("");
-      setPassword("");
+      try {
+        const isUpdated = await updateUsername(dataName, user);
+        if (isUpdated) {
+          alert("Nome de usuário trocado com sucesso!");
+          navigate("/perfil");
+        }
+      } catch (error) {
+        console.error("Erro ao atualizar o nome de usuário", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
-  // const changeName = (newUsername) => {
-  //   const updateUserData = { ...userData, nome: newUsername };
-
-  //   // Envés de atualizar o state, mandar o update para o BD
-  //   setUserData(updateUserData);
-  // };
-
   useEffect(() => {
-    console.log(userData);
-  }, [userData]);
+    console.log(user);
+  }, [user]);
 
   return (
     <div className="changeUsername-form-page">
       <Link to={"/perfil"}>
-        <BsFillArrowLeftSquareFill className="leave-icon" />
+        <BsFillArrowLeftSquareFill
+          className="leave-icon"
+          style={{ display: isLoading ? "none" : "" }}
+        />
       </Link>
       <h1>
         Alterar nome de <br /> usuário
@@ -93,6 +89,7 @@ const ChangeUsername = () => {
             placeholder="Insira seu nome"
             onChange={(e) => setNewUsername(e.target.value)}
             value={newUsername}
+            disabled={isLoading}
           />
         </div>
         <div className="mb-4">
@@ -107,11 +104,14 @@ const ChangeUsername = () => {
             placeholder="Insira sua senha"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            disabled={isLoading}
           />
         </div>
 
-        <button className="btn btn-primary" type="submit">
-          Atualizar
+        {error && <p className="error-message">{error}</p>}
+
+        <button className="btn btn-primary" type="submit" disabled={isLoading}>
+          {isLoading ? "Carregando..." : "Atualizar"}
         </button>
       </form>
     </div>

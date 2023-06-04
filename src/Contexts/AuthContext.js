@@ -2,9 +2,10 @@ import React, { createContext, useEffect, useState } from "react";
 
 // APIs
 import createUser from "../APIs/useCreateUser";
-import changePassword from "../APIs/useApiChangePassword";
-import changeName from "../APIs/useApiChangeUsername";
 import receiveUser from "../APIs/useApiReceiveUser";
+import checkDuplicateEmail from "../APIs/useCheckDuplicateEmail";
+import changeName from "../APIs/useApiChangeUsername";
+import changePassword from "../APIs/useApiChangePassword";
 
 const UserContext = createContext();
 
@@ -12,7 +13,7 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const isAuthenticated = () => {
-    return user !== null; // Ou qualquer outra lógica para verificar se o usuário está autenticado
+    return user !== null;
   };
 
   const login = async (userJson) => {
@@ -24,13 +25,16 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const register = async (userJson) => {
+  const register = async (user, login) => {
+    createUser(user, login);
+  };
+
+  const isDuplicateEmail = async (email) => {
     try {
-      createUser(userJson);
-      const user = JSON.parse(userJson);
-      setUser(user);
+      const result = await checkDuplicateEmail(email);
+      return result;
     } catch (error) {
-      throw new Error("Falha no registro");
+      throw new Error("Erro ao verificar e-mail duplicado");
     }
   };
 
@@ -42,16 +46,14 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const updateUsername = async (userJson) => {
+  const updateUsername = async (newName, user) => {
     try {
-      changeName(userJson);
-      const user = JSON.parse(userJson);
-      setUser((prevUser) => ({
-        ...prevUser,
-        nome: user.nome,
-      }));
+      await changeName(newName, user.id, setUser);
+      const updatedUser = await receiveUser(user.email, user.senha, login);
+      return updatedUser !== null;
     } catch (error) {
-      throw new Error("Falha na atualização do nome de usuário");
+      console.error("Erro ao atualizar o nome de usuário", error);
+      throw error;
     }
   };
 
@@ -60,6 +62,11 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    if (isAuthenticated()) {
+      console.log("Está autenticado!");
+    } else {
+      console.log("Não está autenticado!");
+    }
     console.log(user);
   }, [user]);
 
@@ -69,6 +76,7 @@ export const UserProvider = ({ children }) => {
         user,
         login,
         register,
+        isDuplicateEmail,
         updatePassword,
         updateUsername,
         logout,

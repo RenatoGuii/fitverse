@@ -72,6 +72,7 @@ const ChangePassword = () => {
   return (
     <div className="changePassword-form-page">
       <Link to={"/perfil"}>
+        {/* disabled={isLoading} */}
         <BsFillArrowLeftSquareFill className="leave-icon" />
       </Link>
       <h1>Alterar senha</h1>

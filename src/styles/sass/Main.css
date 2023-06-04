@@ -585,6 +585,7 @@
   display: flex;
   flex-direction: column;
   padding: 40px;
+  max-width: 291px;
 }
 .login-form-page form .mb-4 {
   margin-bottom: 1rem;
@@ -616,6 +617,10 @@
 }
 .login-form-page form .error-message {
   color: red;
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  width: 100%;
 }
 .login-form-page form button {
   background-color: #FFB627;
@@ -661,6 +666,7 @@
   display: flex;
   flex-direction: column;
   padding: 40px;
+  max-width: 291px;
 }
 .register-form-page form .mb-4 {
   margin-bottom: 1rem;
@@ -689,6 +695,13 @@
   text-decoration: none;
   font-size: 13px;
   padding-left: 5px;
+}
+.register-form-page form .error-message {
+  color: red;
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  width: 100%;
 }
 .register-form-page form button {
   background-color: #FFB627;
@@ -741,6 +754,7 @@
   display: flex;
   flex-direction: column;
   padding: 40px;
+  max-width: 291px;
 }
 .changeUsername-form-page form .mb-4 {
   margin-bottom: 1rem;
@@ -769,6 +783,13 @@
   text-decoration: none;
   font-size: 13px;
   padding-left: 5px;
+}
+.changeUsername-form-page form .error-message {
+  color: red;
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  width: 100%;
 }
 .changeUsername-form-page form button {
   background-color: #FFB627;
@@ -821,6 +842,7 @@
   display: flex;
   flex-direction: column;
   padding: 40px;
+  max-width: 291px;
 }
 .changePassword-form-page form .mb-4 {
   margin-bottom: 1rem;

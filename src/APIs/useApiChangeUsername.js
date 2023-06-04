@@ -1,20 +1,27 @@
-const axios = require("axios");
+import axios from "axios";
 
-const changeName = (user) => {
-  const url = `http://127.0.0.1:5000/api/user/${user.id}`; // Substitua pelo URL correto da sua aplicação Flask e pelo ID do usuário que deseja editar
+const changeName = async (dataName, id, updateUser) => {
+  const url = `http://127.0.0.1:5000/api/user/${id}`;
 
-  axios
-    .put(url, user, {
+  const userAttJson = JSON.stringify(dataName);
+
+  try {
+    const response = await axios.put(url, userAttJson, {
       headers: {
         "Content-Type": "application/json",
       },
-    })
-    .then((response) => {
-      console.log("Usuário atualizado com sucesso!");
-    })
-    .catch((error) => {
-      console.error("Falha ao atualizar usuário.", error);
     });
+
+    console.log("Usuário atualizado com sucesso!");
+
+    // Atualize a variável 'user' com os dados atualizados
+    updateUser(response.data);
+
+    return true;
+  } catch (error) {
+    console.error("Falha ao atualizar usuário.", error);
+    throw error;
+  }
 };
 
 export default changeName;
