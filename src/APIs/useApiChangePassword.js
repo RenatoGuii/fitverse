@@ -1,16 +1,20 @@
-const axios = require("axios");
+import axios from "axios";
 
-const changePassword = (user) => {
-  const url = "http://127.0.0.1:5000/api/user/senha/3";
+const changePassword = async (newPassword, id) => {
+  const url = `http://127.0.0.1:5000/api/user/senha/${id}`;
 
-  axios
-    .put(url, user)
-    .then((response) => {
-      console.log("Senha atualizada com sucesso!");
-    })
-    .catch((error) => {
-      console.error("Falha ao atualizar senha.", error);
-    });
+  const data = {
+    senha: newPassword,
+  };
+
+  try {
+    const response = await axios.put(url, data);
+    console.log("Senha atualizada com sucesso!");
+    return true;
+  } catch (error) {
+    console.error("Falha ao atualizar senha.", error);
+    throw error;
+  }
 };
 
 export default changePassword;

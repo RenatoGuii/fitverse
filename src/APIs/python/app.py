@@ -111,5 +111,44 @@ def excluir_usuario(id):
 
     return jsonify({'mensagem': 'Usuário excluído com sucesso'})
 
+
+@app.route('/api/exercicio', methods=['POST'])
+def favoritar_exercicio():
+    data = request.get_json()
+    
+    level = data['level']
+    
+    descricao = data['descricao']
+
+    musculo = data['musculo']    
+
+    cnx = mysql.connector.connect(**db_config)
+    cursor = cnx.cursor()
+
+    query = "INSERT INTO exercicio (level, descricao, musculo) VALUES (%s, %s, %s)"
+    values = (level, descricao, musculo)
+    cursor.execute(query, values)
+    cnx.commit()
+
+    cursor.close()
+    cnx.close()
+
+    return jsonify({'mensagem': 'Exercicio favoritado com sucesso'})
+
+@app.route('/api/exercicio/<int:id>', methods=['DELETE'])
+def desfavoritar_exercicio(id):
+    cnx = mysql.connector.connect(**db_config)
+    cursor = cnx.cursor()
+
+    query = "DELETE FROM exercicio WHERE id = %s"
+    values = (id,)
+    cursor.execute(query, values)
+    cnx.commit()
+
+    cursor.close()
+    cnx.close()
+
+    return jsonify({'mensagem': 'exercicio desfavoritado'})
+
 if __name__ == '__main__':
     app.run()

@@ -38,10 +38,17 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const updatePassword = async (userJson) => {
+  const updatePassword = async (newPassword, user) => {
     try {
-      changePassword(userJson);
+      const response = await changePassword(newPassword, user.id);
+
+      if (response) {
+        const updatedUser = { ...user, senha: newPassword };
+        setUser(updatedUser);
+        return true;
+      }
     } catch (error) {
+      console.error("Falha na atualização de senha", error);
       throw new Error("Falha na atualização de senha");
     }
   };

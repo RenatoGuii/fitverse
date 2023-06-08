@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Context
 import UserContext from "../../../Contexts/AuthContext";
@@ -9,20 +9,21 @@ import UserContext from "../../../Contexts/AuthContext";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 
 const ChangePassword = () => {
-  const user = {
-    senha: "teste",
-    id: 1,
-  }; // Resgatar usuário
+  const { user } = useContext(UserContext);
 
-  const [userData, setUserData] = useState(user);
   const [newPassword, setNewPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const [emptyFields, setEmptyFields] = useState([]);
 
   const { updatePassword } = useContext(UserContext);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    setError("");
     e.preventDefault();
 
     const emptyFieldsArr = [];
@@ -38,42 +39,35 @@ const ChangePassword = () => {
     if (emptyFieldsArr.length > 0) {
       setEmptyFields(emptyFieldsArr);
       alert("Preencha todos os campos!");
-    } else if (oldPassword !== userData.senha) {
-      alert("Senha atual incorreta!");
+    } else if (oldPassword !== user.senha) {
+      setError("Senha atual incorreta!");
     } else if (newPassword.length < 6) {
-      alert("A nova senha deve ter pelo menos 6 digitos!");
+      setError("A nova senha deve ter pelo menos 6 digitos!");
     } else {
-      const userAtt = {
-        senha: newPassword,
-        id: userData.id,
-      };
+      setIsLoading(true);
 
-      const userAttJson = JSON.stringify(userAtt);
-
-      updatePassword(userAttJson);
-
-      alert("Senha atualizada com sucesso :)");
-
-      setNewPassword("");
-      setOldPassword("");
+      try {
+        const isUpdated = await updatePassword(newPassword, user);
+        if (isUpdated) {
+          alert("Senha alterada com sucesso!");
+          navigate("/perfil");
+        }
+      } catch (error) {
+        console.error("Erro ao atualizar o nome de usuário", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
-  // const changePassword = (newPassword) => {
-  //   const updateUserData = { ...userData, senha: newPassword };
-
-  //   // Envés de atualizar o state, mandar o update para o BD
-  //   setUserData(updateUserData);
-  // };
-
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
 
   return (
     <div className="changePassword-form-page">
       <Link to={"/perfil"}>
         {/* disabled={isLoading} */}
-        <BsFillArrowLeftSquareFill className="leave-icon" />
+        <BsFillArrowLeftSquareFill
+          className="leave-icon"
+          style={{ display: isLoading ? "none" : "" }}
+        />
       </Link>
       <h1>Alterar senha</h1>
       <form onSubmit={handleSubmit}>
@@ -89,6 +83,7 @@ const ChangePassword = () => {
             placeholder="Insira seu nome"
             onChange={(e) => setOldPassword(e.target.value)}
             value={oldPassword}
+            disabled={isLoading}
           />
         </div>
         <div className="mb-4">
@@ -103,11 +98,14 @@ const ChangePassword = () => {
             placeholder="Insira sua senha"
             onChange={(e) => setNewPassword(e.target.value)}
             value={newPassword}
+            disabled={isLoading}
           />
         </div>
 
-        <button className="btn btn-primary" type="submit">
-          Atualizar
+        {error && <p className="error-message">{error}</p>}
+
+        <button className="btn btn-primary" type="submit" disabled={isLoading}>
+          {isLoading ? "Carregando..." : "Atualizar"}
         </button>
       </form>
     </div>
