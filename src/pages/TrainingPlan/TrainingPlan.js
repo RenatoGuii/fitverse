@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 
 // Context
-
 import UserContext from "../../Contexts/AuthContext";
 
 // APIs
-import getData from "../../APIs/useApiExercise";
-import getDataTranslate from "../../APIs/useApiTranslate";
+import getData from "../../APIs/useSearchExercises";
+import getDataTranslate from "../../APIs/useTranslate";
 
 // Images
 import tp1 from "../../assets/images/tp1.jpg";
@@ -19,18 +18,15 @@ import { AiFillStar } from "react-icons/ai";
 import { AiOutlineStar } from "react-icons/ai";
 
 const TrainingPlan = () => {
-  const { user } = useContext(UserContext);
-
-  // variables
   const [type, setType] = useState("");
   const [data, setData] = useState(null);
   const [favoriteExercise, setFavoriteExercise] = useState([]);
   const [emptyFields, setEmptyFields] = useState([]);
-
-  // activation variables
   const [loading, setLoading] = useState(false);
   const [noResultsFound, setNoResultsFound] = useState(false);
   const [searchClicked, setSearchClicked] = useState(false);
+
+  const { userExercises } = useContext(UserContext);
 
   // function responsible for searching the exercises through an API call
   const handleSubmit = (e) => {
@@ -147,6 +143,7 @@ const TrainingPlan = () => {
   useEffect(() => {
     // Mandar para o BD
     const favoriteExerciseJson = JSON.stringify(favoriteExercise);
+    // console.log(favoriteExercise);
   }, [favoriteExercise]);
 
   return (

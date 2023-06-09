@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const changeName = async (dataName, id, updateUser) => {
+const changeName = async (dataName, id) => {
   const url = `http://127.0.0.1:5000/api/user/${id}`;
 
   const userAttJson = JSON.stringify(dataName);
@@ -15,7 +15,6 @@ const changeName = async (dataName, id, updateUser) => {
     console.log("Usuário atualizado com sucesso!");
 
     // Atualize a variável 'user' com os dados atualizados
-    updateUser(response.data);
 
     return true;
   } catch (error) {

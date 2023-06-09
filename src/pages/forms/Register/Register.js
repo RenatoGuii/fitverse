@@ -11,7 +11,6 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [emptyFields, setEmptyFields] = useState([]);
-
   const [isLoading, setIsLoading] = useState(false);
 
   const { isAuthenticated, register, login, isDuplicateEmail } =

@@ -15,7 +15,8 @@ const receiveUser = async (email, senha, login) => {
       if (user) {
         const userJson = JSON.stringify(user);
         login(userJson);
-        return user; 
+        console.log(userJson);
+        return user;
       } else {
         console.log("Usuário não encontrado.");
       }
@@ -24,7 +25,7 @@ const receiveUser = async (email, senha, login) => {
     }
   } catch (error) {
     console.error("Erro ao fazer a chamada à API:", error);
-    throw error; 
+    throw error;
   }
 };
 

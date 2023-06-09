@@ -12,10 +12,7 @@ import { BsPerson } from "react-icons/bs";
 import { AiFillStar } from "react-icons/ai";
 
 const Perfil = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [data, setData] = useState([]);
-
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const { logout, user } = useContext(UserContext);
@@ -23,10 +20,6 @@ const Perfil = () => {
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   useEffect(() => {
     setData([
@@ -46,6 +39,10 @@ const Perfil = () => {
       ],
     ]);
   }, []);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
     <div className="container perfil">

@@ -1,5 +1,5 @@
 import axios from "axios";
-import receiveUser from "./useApiReceiveUser";
+import receiveUser from "./useReceiveUser";
 
 
 const createUser = async (data, login) => {

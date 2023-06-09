@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import receiveUser from "../../../APIs/useApiReceiveUser";
+// Context
 import UserContext from "../../../Contexts/AuthContext";
+
+// APIs
+import receiveUser from "../../../APIs/useReceiveUser";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,9 +14,9 @@ const Login = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const navigate = useNavigate();
-
   const { login, logout } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     setError("");
@@ -40,11 +43,11 @@ const Login = () => {
         const user = await receiveUser(email, password, login);
 
         if (user) {
-          login(JSON.stringify(user));
+          localStorage.setItem("user", JSON.stringify(user)); // Armazena as informações de sessão no localStorage
           navigate("/trainingPlan");
           setIsLoading(false);
         } else {
-          setError("email ou senha incorretos");
+          setError("Email ou senha incorretos");
           setIsLoading(false);
         }
       } catch (error) {

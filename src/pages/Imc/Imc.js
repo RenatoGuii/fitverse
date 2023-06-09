@@ -1,23 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 
+// Context
 import UserContext from "../../Contexts/AuthContext";
 
 // API
-import getData from "../../APIs/useApiImc";
-import getDataTranslate from "../../APIs/useApiTranslate";
+import getData from "../../APIs/useImc";
+import getDataTranslate from "../../APIs/useTranslate";
 
 const Imc = () => {
-  const { user } = useContext(UserContext);
-
-  // variables
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [data, setData] = useState("");
   const [emptyFields, setEmptyFields] = useState([]);
-
-  // activation variables
   const [searchClicked, setSearchClicked] = useState(false);
   const [loading, setLoading] = useState(false);
+  
+  const { user } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();

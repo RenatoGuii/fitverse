@@ -2,26 +2,34 @@ import React, { createContext, useEffect, useState } from "react";
 
 // APIs
 import createUser from "../APIs/useCreateUser";
-import receiveUser from "../APIs/useApiReceiveUser";
+import receiveUser from "../APIs/useReceiveUser";
 import checkDuplicateEmail from "../APIs/useCheckDuplicateEmail";
-import changeName from "../APIs/useApiChangeUsername";
-import changePassword from "../APIs/useApiChangePassword";
+import changeName from "../APIs/useChangeUsername";
+import changePassword from "../APIs/useChangePassword";
+import addExercise from "../APIs/useAddExercise";
+import getFavoriteExercises from "../APIs/useGetFavExercises";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null
+  );
+  const [userExercises, setUserExercises] = useState([]);
 
   const isAuthenticated = () => {
     return user !== null;
   };
 
   const login = async (userJson) => {
+    const userData = JSON.parse(userJson);
     try {
-      const user = JSON.parse(userJson);
-      setUser(user);
+      setUser(userData);
+      if (userData) {
+        await getFavoriteExercises(userData.id, setUserExercises);
+      }
     } catch (error) {
-      throw new Error("Falha no login");
+      console.error(error);
     }
   };
 
@@ -44,7 +52,8 @@ export const UserProvider = ({ children }) => {
 
       if (response) {
         const updatedUser = { ...user, senha: newPassword };
-        setUser(updatedUser);
+        setUser(updatedUser); // Atualiza o estado do usuário
+        localStorage.setItem("user", JSON.stringify(updatedUser));
         return true;
       }
     } catch (error) {
@@ -53,18 +62,37 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const updateUsername = async (newName, user) => {
+  const updateUsername = async (newName, userData) => {
     try {
-      await changeName(newName, user.id, setUser);
-      const updatedUser = await receiveUser(user.email, user.senha, login);
-      return updatedUser !== null;
+      const isUpdated = await changeName(newName, userData.id);
+
+      if (isUpdated) {
+        const updatedUser = await receiveUser(
+          userData.email,
+          userData.senha,
+          login
+        );
+
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        return updatedUser !== null;
+      }
     } catch (error) {
       console.error("Erro ao atualizar o nome de usuário", error);
       throw error;
     }
   };
 
+  const addNewExercise = async (exercise, user) => {
+    try {
+      await addExercise(exercise, user.id);
+    } catch (error) {
+      console.error("Erro ao favoritar exercício!", error);
+      throw error;
+    }
+  };
+
   const logout = () => {
+    localStorage.removeItem("user"); // Remove as informações de sessão do localStorage
     setUser(null);
   };
 
@@ -75,17 +103,20 @@ export const UserProvider = ({ children }) => {
       console.log("Não está autenticado!");
     }
     console.log(user);
-  }, [user]);
+    console.log(userExercises);
+  }, [user, userExercises]);
 
   return (
     <UserContext.Provider
       value={{
         user,
+        userExercises,
         login,
         register,
         isDuplicateEmail,
         updatePassword,
         updateUsername,
+        addNewExercise,
         logout,
         isAuthenticated,
       }}

@@ -115,18 +115,24 @@ def excluir_usuario(id):
 @app.route('/api/exercicio', methods=['POST'])
 def favoritar_exercicio():
     data = request.get_json()
-    
-    level = data['level']
-    
-    descricao = data['descricao']
 
-    musculo = data['musculo']    
+    musculo = data['musculo'] 
+
+    user_id = data['use_id']   
+
+    nome = data['nome']
+
+    equipamento = data['equipamento']
+
+    gif_url = data['gif_url']
+
+    tipo = data['tipo']
 
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
 
-    query = "INSERT INTO exercicio (level, descricao, musculo) VALUES (%s, %s, %s)"
-    values = (level, descricao, musculo)
+    query = "INSERT INTO exercicio (musculo, use_id, nome, equipamento, gif_url, tipo) VALUES (%s, %s, %s, %s, %s, %s)"
+    values = (musculo, use_id, equipamento, gif_url, tipo)
     cursor.execute(query, values)
     cnx.commit()
 
@@ -150,5 +156,25 @@ def desfavoritar_exercicio(id):
 
     return jsonify({'mensagem': 'exercicio desfavoritado'})
 
+@app.route('/api/exercicio/<int:user_id>', methods=['GET'])
+def obter_exercicios():
+    cnx = mysql.connector.connect(**db_config)
+    cursor = cnx.cursor()
+
+    query = "SELECT * FROM exercicio WHERE user_id = %s"
+    values = (user_id)
+    cursor.execute(query)
+    result = cursor.fetchall()
+
+    exercicios = []
+    for row in result:
+        exercicio = {'id': row[0], 'musculo': row[1], 'user_id': row[2], 'nome': row[3], 'equipamento': row[4], 'gif_url': row[5], 'tipo': row[6]}
+        exercicios.append(exercicio)
+
+    cursor.close()
+    cnx.close()
+
+    return jsonify(exercicios)
+    
 if __name__ == '__main__':
     app.run()

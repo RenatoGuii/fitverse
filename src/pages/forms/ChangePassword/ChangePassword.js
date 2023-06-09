@@ -15,7 +15,6 @@ const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
   const [emptyFields, setEmptyFields] = useState([]);
 
   const { updatePassword } = useContext(UserContext);
@@ -39,10 +38,12 @@ const ChangePassword = () => {
     if (emptyFieldsArr.length > 0) {
       setEmptyFields(emptyFieldsArr);
       alert("Preencha todos os campos!");
+    } else if (oldPassword === newPassword) {
+      setError("A nova senha deve ser diferente da senha atual!");
     } else if (oldPassword !== user.senha) {
       setError("Senha atual incorreta!");
     } else if (newPassword.length < 6) {
-      setError("A nova senha deve ter pelo menos 6 digitos!");
+      setError("A nova senha deve ter pelo menos 6 dígitos!");
     } else {
       setIsLoading(true);
 
