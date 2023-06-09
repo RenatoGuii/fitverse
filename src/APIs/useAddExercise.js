@@ -1,24 +1,26 @@
 import axios from "axios";
 
-const addExercise = (exercise, id) => {
+const addExercise = async (exercise, id) => {
   const url = "http://127.0.0.1:5000/api/exercicio";
-  // Substitua pelo URL correto da sua aplicação Flask
 
   const data = {
-    musculo: "musculo do exercicio",
-    user_id: "id do usuario",
-    nome: "nome do exercicio",
-    gif_url: "gif_url",
-    equipamento: "equipamento",
-    tipo: "tipo do treino",
+    musculo: exercise.target,
+    user_id: id,
+    nome: exercise.name,
+    gif_url: exercise.gifUrl,
+    equipamento: exercise.equipment,
+    tipo: exercise.type,
   };
 
+  console.log(data);
+
   try {
-    const response = axios.post(url, data);
+    const response = await axios.post(url, data);
     console.log("Exercicio favoritado!");
     return true;
   } catch (error) {
-    console.log("Falha ao favoritar exercício!");
+    console.log("Falha ao favoritar exercício!", error);
+    throw error;
   }
 };
 

@@ -52,7 +52,7 @@ export const UserProvider = ({ children }) => {
 
       if (response) {
         const updatedUser = { ...user, senha: newPassword };
-        setUser(updatedUser); // Atualiza o estado do usuário
+        setUser(updatedUser);
         localStorage.setItem("user", JSON.stringify(updatedUser));
         return true;
       }
@@ -82,9 +82,9 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const addNewExercise = async (exercise, user) => {
+  const addNewExercise = async (exercise, userId) => {
     try {
-      await addExercise(exercise, user.id);
+      await addExercise(exercise, userId);
     } catch (error) {
       console.error("Erro ao favoritar exercício!", error);
       throw error;
@@ -92,7 +92,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem("user"); // Remove as informações de sessão do localStorage
+    localStorage.removeItem("user");
     setUser(null);
   };
 

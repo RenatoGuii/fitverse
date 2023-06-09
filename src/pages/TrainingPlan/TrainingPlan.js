@@ -26,7 +26,7 @@ const TrainingPlan = () => {
   const [noResultsFound, setNoResultsFound] = useState(false);
   const [searchClicked, setSearchClicked] = useState(false);
 
-  const { userExercises } = useContext(UserContext);
+  const { user, userExercises, addNewExercise } = useContext(UserContext);
 
   // function responsible for searching the exercises through an API call
   const handleSubmit = (e) => {
@@ -117,7 +117,17 @@ const TrainingPlan = () => {
         (item) => item[0] === selectedExercise[0]
       );
 
+      const objectExercise = {
+        name: selectedExercise[0],
+        type: selectedExercise[1],
+        target: selectedExercise[2],
+        equipment: selectedExercise[3],
+        gifUrl: selectedExercise[4],
+      };
+
       if (!isAlreadyFavorited) {
+        addNewExercise(objectExercise, user.id);
+
         setFavoriteExercise((prevFavoriteExercise) => [
           ...prevFavoriteExercise,
           selectedExercise,
