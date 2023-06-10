@@ -43,7 +43,7 @@ const Login = () => {
         const user = await receiveUser(email, password, login);
 
         if (user) {
-          localStorage.setItem("user", JSON.stringify(user)); // Armazena as informações de sessão no localStorage
+          localStorage.setItem("user", JSON.stringify(user));
           navigate("/trainingPlan");
           setIsLoading(false);
         } else {
@@ -59,7 +59,7 @@ const Login = () => {
 
   useEffect(() => {
     logout();
-  }, []);
+  });
 
   return (
     <div className="login-form-page">

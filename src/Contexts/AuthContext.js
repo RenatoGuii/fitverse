@@ -6,8 +6,9 @@ import receiveUser from "../APIs/useReceiveUser";
 import checkDuplicateEmail from "../APIs/useCheckDuplicateEmail";
 import changeName from "../APIs/useChangeUsername";
 import changePassword from "../APIs/useChangePassword";
-import addExercise from "../APIs/useAddExercise";
 import getFavoriteExercises from "../APIs/useGetFavExercises";
+import addExercise from "../APIs/useAddFavExercise";
+import deleteExercise from "../APIs/useDeleteFavExercise";
 
 const UserContext = createContext();
 
@@ -25,9 +26,6 @@ export const UserProvider = ({ children }) => {
     const userData = JSON.parse(userJson);
     try {
       setUser(userData);
-      if (userData) {
-        await getFavoriteExercises(userData.id, setUserExercises);
-      }
     } catch (error) {
       console.error(error);
     }
@@ -82,12 +80,27 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const getExercises = async () => {
+    setUserExercises(await getFavoriteExercises(user.id));
+  };
+
   const addNewExercise = async (exercise, userId) => {
     try {
-      await addExercise(exercise, userId);
+      const isAdd = await addExercise(exercise, userId);
+      if (isAdd) {
+        setUserExercises(await getFavoriteExercises(userId));
+      }
     } catch (error) {
       console.error("Erro ao favoritar exercício!", error);
       throw error;
+    }
+  };
+
+  const deleteFavExercise = async (exerciseID) => {
+    const isDeleted = await deleteExercise(exerciseID);
+
+    if (isDeleted) {
+      setUserExercises(await getFavoriteExercises(exerciseID));
     }
   };
 
@@ -116,7 +129,9 @@ export const UserProvider = ({ children }) => {
         isDuplicateEmail,
         updatePassword,
         updateUsername,
+        getExercises,
         addNewExercise,
+        deleteFavExercise,
         logout,
         isAuthenticated,
       }}

@@ -21,10 +21,6 @@ const App = () => {
   const { isAuthenticated, user } = useContext(UserContext);
   const location = useLocation();
 
-  // useEffect(() => {
-  //   console.log(isAuthenticated());
-  // }, [user]);
-
   const shouldShowNavbar = ![
     "/login",
     "/register",
@@ -35,10 +31,9 @@ const App = () => {
   return (
     <div>
       {shouldShowNavbar && <Navbar />}
-      {/* Resto do seu código */}
       <Routes>
         {/* does not need to be authenticated */}
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/trainingPlan" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 

@@ -8,7 +8,7 @@ const getFavoriteExercises = async (id) => {
 
     if (response.status === 200) {
       console.log(response.data);
-      //   setUserExercises(response.data);
+      return response.data;
     } else {
       console.log("Falha ao receber exercícios.");
       throw new Error("Falha ao receber exercícios.");

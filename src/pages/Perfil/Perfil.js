@@ -14,11 +14,34 @@ import { AiFillStar } from "react-icons/ai";
 const Perfil = () => {
   const [data, setData] = useState([]);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [NoResults, setNoResults] = useState(false);
 
-  const { logout, user } = useContext(UserContext);
+  const { user, logout, userExercises, getExercises, deleteFavExercise } = useContext(UserContext);
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
+    // NoResults(false);
+    // isLoading(true);
+    // const dataBD = getExercises(user.id);
+
+    // if (dataBD > 0) {
+    //   setIsCollapsed(!isCollapsed);
+    //   isLoading(false);
+    // } else {
+    //   NoResults(true);
+    //   isLoading(false);
+    // }
+  };
+
+  const handleRemoveFavoriteExercise = (id) => {
+    const confirmed = window.confirm(
+      "Deseja excluir esse treino dos seus favoritos?"
+    );
+
+    if (confirmed) {
+      deleteFavExercise(id);
+    }
   };
 
   useEffect(() => {
@@ -77,15 +100,30 @@ const Perfil = () => {
         >
           {isCollapsed ? "Esconder" : "Mostrar"}
         </button>
+        <span
+          className="loading-text"
+          style={{ display: isLoading ? "inline" : "none" }}
+        >
+          Carregando...
+        </span>
         <div className="collapse" id="collapseExample">
           <div className="row results">
+            <p
+              className="no-results-text"
+              style={{ display: NoResults ? "block" : "none" }}
+            >
+              Nenhum resultado encontrado!
+            </p>
             {data.map((item, index) => (
               <div
                 key={index}
                 id={`card-${index}`}
                 className={`result-item my-2 col-6`}
               >
-                <AiFillStar className="star-favorite" />
+                <AiFillStar
+                  onClick={() => handleRemoveFavoriteExercise(item.id)}
+                  className="star-favorite"
+                />
 
                 <p className="name-item">{item[0]}</p>
                 <p className="type-item">

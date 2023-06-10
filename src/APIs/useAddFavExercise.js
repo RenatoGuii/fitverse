@@ -16,6 +16,7 @@ const addExercise = async (exercise, id) => {
 
   try {
     const response = await axios.post(url, data);
+    console.log(response);
     console.log("Exercicio favoritado!");
     return true;
   } catch (error) {

@@ -26,7 +26,8 @@ const TrainingPlan = () => {
   const [noResultsFound, setNoResultsFound] = useState(false);
   const [searchClicked, setSearchClicked] = useState(false);
 
-  const { user, userExercises, addNewExercise } = useContext(UserContext);
+  const { user, userExercises, addNewExercise, deleteFavExercise } =
+    useContext(UserContext);
 
   // function responsible for searching the exercises through an API call
   const handleSubmit = (e) => {
@@ -62,9 +63,6 @@ const TrainingPlan = () => {
         .catch((error) => {
           console.error(error);
           setNoResultsFound(true);
-        })
-        .finally(() => {
-          setLoading(false);
         });
 
       setEmptyFields([]);
@@ -126,35 +124,25 @@ const TrainingPlan = () => {
       };
 
       if (!isAlreadyFavorited) {
-        addNewExercise(objectExercise, user.id);
+        const isAdd = addNewExercise(objectExercise, user.id);
 
-        setFavoriteExercise((prevFavoriteExercise) => [
-          ...prevFavoriteExercise,
-          selectedExercise,
-        ]);
+        // Apagar depois
+        if (isAdd) {
+          setFavoriteExercise((prevFavoriteExercise) => [
+            ...prevFavoriteExercise,
+            selectedExercise,
+          ]);
+        }
       }
     }
   };
 
-  // function that deletes exercises from the favorites tab
-  const handleRemoveFavoriteExercise = (name) => {
-    const confirmed = window.confirm(
-      "Deseja excluir esse treino dos seus favoritos?"
-    );
-
-    if (confirmed) {
-      const updatedFavorites = favoriteExercise.filter(
-        (item) => item[0] !== name
-      );
-      setFavoriteExercise(updatedFavorites);
-    }
-  };
-
   useEffect(() => {
-    // Mandar para o BD
-    const favoriteExerciseJson = JSON.stringify(favoriteExercise);
-    // console.log(favoriteExercise);
-  }, [favoriteExercise]);
+    // Apagar depois
+    console.log(`Local: \n${favoriteExercise}`);
+    
+    console.log(`BD: \n${userExercises}`);
+  }, [favoriteExercise, userExercises]);
 
   return (
     <div>
@@ -255,10 +243,7 @@ const TrainingPlan = () => {
                       {favoriteExercise.some(
                         (favorite) => favorite[0] === item[0]
                       ) ? (
-                        <AiFillStar
-                          onClick={() => handleRemoveFavoriteExercise(item[0])}
-                          className="star-favorite"
-                        />
+                        <AiFillStar className="star-favorite" />
                       ) : (
                         <AiOutlineStar
                           onClick={() => handleSaveExercise(index)}

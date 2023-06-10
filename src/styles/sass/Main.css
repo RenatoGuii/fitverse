@@ -402,6 +402,14 @@
   color: #FFB627;
   transition: 0.5s;
 }
+.container.perfil .favoriteEx .loading-text {
+  font-weight: 600;
+  padding-left: 15px;
+}
+.container.perfil .favoriteEx .no-results-text {
+  font-weight: 600;
+  text-align: center;
+}
 .container.perfil .favoriteEx .row > * {
   padding: 0;
 }
