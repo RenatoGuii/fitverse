@@ -1,22 +1,15 @@
 import axios from "axios";
 
 const deleteExercise = async (id) => {
-  const url = "http://127.0.0.1:5000/api/exercicio";
-
-  const data = {
-    id: id,
-  };
-
-  console.log(data);
+  const url = `http://127.0.0.1:5000/api/exercicio/${id}`;
 
   try {
-    const response = await axios.post(url, data);
+    const response = await axios.delete(url);
     console.log(response);
     console.log("Exercício deletado!");
     return true;
   } catch (error) {
-    console.log("Falha ao deletar exercício!", error);
-    throw error;
+    console.error("Falha ao deletar exercício!", error);
   }
 };
 

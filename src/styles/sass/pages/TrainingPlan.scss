@@ -1,3 +1,15 @@
+.loadingAdd-text {
+    background-color: $Blue;
+    color: $White;
+    font-weight: 600;
+    padding: 10px;
+    margin: 0 12px;
+    top: 69px;
+    position: sticky;
+    text-align: center;
+    z-index: 20;
+}
+    
     .container.trainingPlan {
         align-items: center;
         display: flex;
@@ -100,12 +112,11 @@
                 margin-bottom: 30px;
             }
         }
-    
+
         .loading-text {
-            color: $Black;
-            font-weight: 800;
-            padding-top: 45px;
             text-align: center;
+            font-weight: 800;
+            padding-top: 30px;
         }
     
         .results-form {

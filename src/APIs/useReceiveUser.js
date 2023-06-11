@@ -13,12 +13,23 @@ const receiveUser = async (email, senha, login) => {
       );
 
       if (user) {
-        const userJson = JSON.stringify(user);
-        login(userJson);
-        console.log(userJson);
-        return user;
+        return new Promise((resolve, reject) => {
+          const userJson = JSON.stringify(user);
+          const exercisesPromise = login(userJson);
+
+          exercisesPromise
+            .then((result) => {
+              const exercises = result;
+              resolve([user, exercises]);
+            })
+            .catch((error) => {
+              console.error(error);
+              reject(error);
+            });
+        });
       } else {
         console.log("Usuário não encontrado.");
+        return "usuario não encontrado"
       }
     } else {
       console.log("Falha ao receber usuários.");

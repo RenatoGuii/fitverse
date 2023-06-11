@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import "./styles/sass/Main.css";
 
@@ -32,12 +32,12 @@ const App = () => {
     <div>
       {shouldShowNavbar && <Navbar />}
       <Routes>
-        {/* does not need to be authenticated */}
+        {/* não precisa de autenticação */}
         <Route path="/" element={<Navigate to="/trainingPlan" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* needs to be authenticated */}
+        {/* Precisa de autenticação */}
         {isAuthenticated() ? (
           <>
             <Route path="/trainingPlan" element={<TrainingPlan />} />

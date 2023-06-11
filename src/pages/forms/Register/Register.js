@@ -63,7 +63,17 @@ const Register = () => {
             senha: password,
           };
 
-          register(userObj, login);
+          const isRegister = await register(userObj, login);
+
+          if (isRegister) {
+            navigate("/trainingPlan");
+            setIsLoading(false);
+
+            setUsername("");
+            setEmail("");
+            setPassword("");
+            setConfirmPassword("");
+          }
         }
       } catch (error) {
         setError("Erro ao fazer registro");
@@ -71,20 +81,6 @@ const Register = () => {
       }
     }
   };
-
-  useEffect(() => {
-    if (isAuthenticated()) {
-      navigate("/trainingPlan");
-      setIsLoading(false);
-
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-    } else {
-      setIsLoading(false);
-    }
-  }, [isAuthenticated()]);
 
   return (
     <div className="register-form-page">

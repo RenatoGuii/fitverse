@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
 // React Router
 import { Link } from "react-router-dom";
@@ -12,63 +12,61 @@ import { BsPerson } from "react-icons/bs";
 import { AiFillStar } from "react-icons/ai";
 
 const Perfil = () => {
-  const [data, setData] = useState([]);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [NoResults, setNoResults] = useState(false);
+  const [loadingUserExercise, setLoadingExercise] = useState(false);
+  const [isLoadingDelete, setIsLoadingDelete] = useState(false);
+  const [noResults, setNoResults] = useState(false);
 
-  const { user, logout, userExercises, getExercises, deleteFavExercise } = useContext(UserContext);
+  const { user, logout, userExercises, getExercises, deleteFavExercise } =
+    useContext(UserContext);
 
-  const toggleCollapse = () => {
+  const toggleCollapse = async () => {
     setIsCollapsed(!isCollapsed);
-    // NoResults(false);
-    // isLoading(true);
-    // const dataBD = getExercises(user.id);
+    setNoResults(false);
 
-    // if (dataBD > 0) {
-    //   setIsCollapsed(!isCollapsed);
-    //   isLoading(false);
-    // } else {
-    //   NoResults(true);
-    //   isLoading(false);
-    // }
+    if (userExercises.length === 0) {
+      setLoadingExercise(true);
+      try {
+        const exercises = await getExercises(user.id);
+
+        if (exercises) {
+          setNoResults(false);
+        } else {
+          setNoResults(true);
+        }
+
+        setLoadingExercise(false);
+      } catch (error) {
+        console.error("Erro ao obter exercícios favoritos", error);
+      } finally {
+        setLoadingExercise(false);
+      }
+    } else {
+      setIsCollapsed(!isCollapsed);
+    }
   };
 
-  const handleRemoveFavoriteExercise = (id) => {
+  const handleRemoveFavoriteExercise = async (id) => {
     const confirmed = window.confirm(
       "Deseja excluir esse treino dos seus favoritos?"
     );
 
     if (confirmed) {
-      deleteFavExercise(id);
+      setIsLoadingDelete(true);
+      try {
+        await deleteFavExercise(id);
+        alert("Exercício deletado com sucesso!");
+      } catch (error) {
+        console.error("Falha ao deletar exercício!", error);
+      } finally {
+        setIsLoadingDelete(false);
+      }
     }
   };
 
-  useEffect(() => {
-    setData([
-      [
-        "archer push up",
-        "peito",
-        "peitorais",
-        "peso corporal",
-        "http://d205bpvrqc9yn1.cloudfront.net/3294.gif",
-      ],
-      [
-        "archer push up",
-        "peito",
-        "peitorais",
-        "peso corporal",
-        "http://d205bpvrqc9yn1.cloudfront.net/3294.gif",
-      ],
-    ]);
-  }, []);
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
   return (
     <div className="container perfil">
+      {isLoadingDelete && <p className="loading-text">Excluindo...</p>}
       <h1 className="perfil-h1">Perfil de Usuário</h1>
       <div className="user-info-box">
         <h4 className="person-title">
@@ -100,21 +98,22 @@ const Perfil = () => {
         >
           {isCollapsed ? "Esconder" : "Mostrar"}
         </button>
+
         <span
-          className="loading-text"
-          style={{ display: isLoading ? "inline" : "none" }}
+          className="loadingUserExercise-text"
+          style={{
+            display: loadingUserExercise && isCollapsed ? "inline" : "none",
+          }}
         >
           Carregando...
         </span>
+
         <div className="collapse" id="collapseExample">
           <div className="row results">
-            <p
-              className="no-results-text"
-              style={{ display: NoResults ? "block" : "none" }}
-            >
-              Nenhum resultado encontrado!
-            </p>
-            {data.map((item, index) => (
+            {noResults && (
+              <p className="no-results-text">Nenhum exercício encontrado!</p>
+            )}
+            {userExercises.map((item, index) => (
               <div
                 key={index}
                 id={`card-${index}`}
@@ -125,15 +124,15 @@ const Perfil = () => {
                   className="star-favorite"
                 />
 
-                <p className="name-item">{item[0]}</p>
+                <p className="name-item">{item.nome}</p>
                 <p className="type-item">
-                  Tipo: <span>{item[1]}</span>
+                  Tipo: <span>{item.tipo}</span>
                 </p>
                 <p className="target-item">
-                  Grupo alvo: <span>{item[2]}</span>
+                  Grupo alvo: <span>{item.musculo}</span>
                 </p>
                 <p className="equipment-item">
-                  Equipamento: <span>{item[3]}</span>
+                  Equipamento: <span>{item.equipamento}</span>
                 </p>
                 <input
                   type="submit"
@@ -157,13 +156,13 @@ const Perfil = () => {
                           className="modal-title"
                           id={`modal-label-item${index}`}
                         >
-                          {item[0]}
+                          {item.nome}
                         </h5>
                       </div>
                       <div className="body-modal">
                         <img
                           className="gif-exercise"
-                          src={item[4]}
+                          src={item.gif_url}
                           alt="gif-exercise"
                         />
                       </div>

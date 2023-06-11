@@ -12,15 +12,12 @@ const addExercise = async (exercise, id) => {
     tipo: exercise.type,
   };
 
-  console.log(data);
-
   try {
     const response = await axios.post(url, data);
-    console.log(response);
     console.log("Exercicio favoritado!");
     return true;
   } catch (error) {
-    console.log("Falha ao favoritar exercício!", error);
+    console.error("Falha ao favoritar exercício!", error);
     throw error;
   }
 };

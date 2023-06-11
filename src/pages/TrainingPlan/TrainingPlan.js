@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 // Context
 import UserContext from "../../Contexts/AuthContext";
@@ -22,56 +22,14 @@ const TrainingPlan = () => {
   const [data, setData] = useState(null);
   const [favoriteExercise, setFavoriteExercise] = useState([]);
   const [emptyFields, setEmptyFields] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loadingExercises, setLoadingExercises] = useState(false);
+  const [loadindAdd, setLoadingAdd] = useState(false);
   const [noResultsFound, setNoResultsFound] = useState(false);
   const [searchClicked, setSearchClicked] = useState(false);
 
-  const { user, userExercises, addNewExercise, deleteFavExercise } =
-    useContext(UserContext);
+  const { user, userExercises, addNewExercise } = useContext(UserContext);
 
-  // function responsible for searching the exercises through an API call
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const emptyFieldsArr = [];
-
-    if (type === "") {
-      emptyFieldsArr.push("type");
-    }
-
-    if (emptyFieldsArr.length > 0) {
-      setEmptyFields(emptyFieldsArr);
-      setSearchClicked(true);
-      alert("Preencha os campos primeiro!");
-    } else {
-      setLoading(true);
-
-      getData(type)
-        .then((response) => {
-          if (response && response.length > 0) {
-            const translatedString = dataTranslation(response);
-            getDataTranslate(translatedString).then((response) => {
-              setData(dataChangeFormat(response));
-              setLoading(false);
-            });
-          } else {
-            setData([]);
-            setNoResultsFound(true);
-            setLoading(false);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-          setNoResultsFound(true);
-        });
-
-      setEmptyFields([]);
-      setSearchClicked(true);
-      setType("");
-    }
-  };
-
-  // function where we transform an array of objects into a string with the Object values, then translated by the API, and then becomes an array with translated strings
+  // função onde transformamos um array de objetos (API de exercicios) em uma string apenas com seus valores
   const dataTranslation = (array) => {
     const itemTexts = array.map((item) => {
       const itemFiltering = {
@@ -92,7 +50,7 @@ const TrainingPlan = () => {
     return stringToArray;
   };
 
-  // function where we transform the translated array strings into arrays
+  // função que transforma os strings traduzidas do array em arrays
   const dataChangeFormat = (array) => {
     const itemText = array.map((item) => {
       const stringToArray = item.split(", ");
@@ -102,18 +60,57 @@ const TrainingPlan = () => {
     return itemText;
   };
 
-  // Function that saves exercises in a favorites tab
-  const handleSaveExercise = (index) => {
+  // função que chama a API do banco de exercícios
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const emptyFieldsArr = [];
+
+    if (type === "") {
+      emptyFieldsArr.push("type");
+    }
+
+    if (emptyFieldsArr.length > 0) {
+      setEmptyFields(emptyFieldsArr);
+      setSearchClicked(true);
+      alert("Preencha os campos primeiro!");
+    } else {
+      setLoadingExercises(true);
+
+      getData(type)
+        .then((response) => {
+          if (response && response.length > 0) {
+            const translatedString = dataTranslation(response);
+            getDataTranslate(translatedString).then((response) => {
+              setData(dataChangeFormat(response));
+              setLoadingExercises(false);
+            });
+          } else {
+            setData([]);
+            setNoResultsFound(true);
+            setLoadingExercises(false);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          setNoResultsFound(true);
+        });
+
+      setEmptyFields([]);
+      setSearchClicked(true);
+      setType("");
+    }
+  };
+
+
+  const handleSaveExercise = async (index) => {
     const confirmed = window.confirm(
       "Deseja adicionar o treino aos seus treinos favoritos?"
     );
 
     if (confirmed) {
+      setLoadingAdd(true);
       const selectedExercise = data[index];
-
-      const isAlreadyFavorited = favoriteExercise.some(
-        (item) => item[0] === selectedExercise[0]
-      );
 
       const objectExercise = {
         name: selectedExercise[0],
@@ -123,29 +120,27 @@ const TrainingPlan = () => {
         gifUrl: selectedExercise[4],
       };
 
-      if (!isAlreadyFavorited) {
-        const isAdd = addNewExercise(objectExercise, user.id);
+      const isAlreadyFavorited = userExercises.some(
+        (item) => item.nome === objectExercise.name
+      );
 
-        // Apagar depois
-        if (isAdd) {
-          setFavoriteExercise((prevFavoriteExercise) => [
-            ...prevFavoriteExercise,
-            selectedExercise,
-          ]);
+      if (!isAlreadyFavorited) {
+        const isFavorited = await addNewExercise(objectExercise, user.id);
+
+        if (isFavorited) {
+          setLoadingAdd(false);
+          alert("Exercício favoritado com sucesso!");
         }
+      } else {
+        alert("Esse exercício já está favoritado!");
       }
     }
   };
 
-  useEffect(() => {
-    // Apagar depois
-    console.log(`Local: \n${favoriteExercise}`);
-    
-    console.log(`BD: \n${userExercises}`);
-  }, [favoriteExercise, userExercises]);
-
   return (
     <div>
+      {loadindAdd && <p className="loadingAdd-text">Adicionando...</p>}
+
       <div className="container trainingPlan">
         <div className="text-tp">
           <h2>
@@ -220,11 +215,11 @@ const TrainingPlan = () => {
             className="search-button"
             type="submit"
             value="Pesquisar"
-            disabled={loading}
+            disabled={loadingExercises}
           />
         </form>
 
-        {loading ? (
+        {loadingExercises ? (
           <p className="loading-text">Carregando...</p>
         ) : (
           <div>

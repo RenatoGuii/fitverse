@@ -42,13 +42,18 @@ const Login = () => {
       try {
         const user = await receiveUser(email, password, login);
 
-        if (user) {
-          localStorage.setItem("user", JSON.stringify(user));
-          navigate("/trainingPlan");
-          setIsLoading(false);
-        } else {
+        if (user === "usuario não encontrado") {
           setError("Email ou senha incorretos");
           setIsLoading(false);
+        } else {
+          if (user[0]) {
+            localStorage.setItem("user", JSON.stringify(user[0]));
+            if (user[1]) {
+              localStorage.setItem("userExercises", JSON.stringify(user[1]));
+              navigate("/trainingPlan");
+              setIsLoading(false);
+            }
+          }
         }
       } catch (error) {
         setError("Erro ao fazer login");
@@ -59,7 +64,7 @@ const Login = () => {
 
   useEffect(() => {
     logout();
-  });
+  }, []);
 
   return (
     <div className="login-form-page">

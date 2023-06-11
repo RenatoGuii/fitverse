@@ -14,8 +14,6 @@ const changeName = async (dataName, id) => {
 
     console.log("Usuário atualizado com sucesso!");
 
-    // Atualize a variável 'user' com os dados atualizados
-
     return true;
   } catch (error) {
     console.error("Falha ao atualizar usuário.", error);
